@@ -1,0 +1,223 @@
+{include file="$include_tpl/includes/head.html"}
+<!--sidebar-->
+{include file="$include_tpl/includes/sidebar.html"}
+<!--/sidebar-->
+<!--Page Container-->
+<section class="main-container">	
+    <!--Page Header-->
+    <div class="header">
+        <div class="header-content">
+            <div class="page-title">
+                <i class="icon-table position-left"></i> {$title}
+            </div>
+            <ul class="breadcrumb">
+                <li><a href="{$adminweburl}">Beranda</a></li>
+                <li><a href="{$adminweburl}/metode_pengiriman/">{$title}</a></li>
+                <li class="active">{$sub_title}</li>
+            </ul>					
+        </div>
+    </div>		
+    <!--/Page Header-->
+
+    <!--Page Content-->
+    <div id="wrapper" class="container-fluid page-content">				
+        <div class="panel panel-flat" style="margin: 5px;">
+            <div class="form-group panel-body no-padding-bottom">
+
+                <div id="alert_error" class="form-group" style="display: none;">
+                    <div class="alert alert-danger">&nbsp;</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="kode">Kode:</label>
+                    <input type="text" value="{if $isEdit eq true}{$data[0].kode}{/if}" class="form-control" name="kode" placeholder="" />
+                </div>
+
+                <div class="form-group">
+                    <label for="nama">Nama:</label>
+                    <input type="text" value="{if $isEdit eq true}{$data[0].nama}{/if}" class="form-control" name="nama" placeholder="" />
+                </div>
+
+                <div class="form-group">
+                    <label for="gambar">Logo Ekspedisi:</label>                        
+                    <style type="text/css">
+                        .cropit-image-preview {
+                            border:1px solid #a6bac4;
+                            width: 225px;
+                            height: 93px;
+                            cursor: move;
+                        }
+
+                        .H-new-kol-post-img {
+                            width: 225px;
+                            height: 93px;
+                        }
+                    </style>
+
+                    <div class="H-new-kol-post-img image-editor">
+                        <input id="fileupload_gambar" type="file" name="fileupload_gambar" style="display:none;" class="cropit-image-input" />
+                        <div class="cropit-image-preview"></div>
+                    </div>
+                    <label>Ukuran 225 X 93 px</label><br />   
+                    <div id="upload_gambar" class="btn btn-primary">Upload</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="status">Status:</label>
+                    <table>
+                        <tr>
+                            <td>
+                                <label><input type="radio" name="status" value="Y" {if $data[0].status eq 'Y'}checked{/if} />&nbsp;&nbsp;<span class="label bg-blue" style="font-size: 9pt;">AKTIF</span>&nbsp;&nbsp;</label>
+                                <label><input type="radio" name="status" value="N" {if $data[0].status eq 'N'}checked{/if} />&nbsp;&nbsp;<span class="label bg-blue" style="font-size: 9pt;">TIDAK AKTIF</span>&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="form-group">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td width="100%">&nbsp;</td> 
+                                <td nowrap>
+                                    <div id="i_loading" class="G-btn-animation" style="display: none;"><img src="{$tpl_dir}/assets/img/loading.gif" /></div>                  
+                                    <div id="btn_submit"  class="btn btn-primary">Simpan</div>
+                                    <a id="btn_batal"  href="list.php" class="btn btn-warning">Batal</a>                                                        
+                                </td>
+                            </tr>
+                        </tbody>                                
+                    </table>
+                </div>
+            </div>								
+        </div>
+    </div>
+    <!--/Page Content-->
+	
+    <!--Footer -->
+    {include file="$include_tpl/includes/footer.html"}
+    <!--/Footer-->
+
+</section>
+<!--/Page Container-->
+
+<!-- Global scripts -->
+<script src="{$tpl_dir}/js/jquery.js"></script>	
+<script src="{$tpl_dir}/js/bootstrap.js"></script>
+<script src="{$tpl_dir}/js/jquery.ui.js"></script>
+<script src="{$tpl_dir}/js/nav.accordion.js"></script>	
+<script src="{$tpl_dir}/js/hammerjs.js"></script>
+<script src="{$tpl_dir}/js/jquery.hammer.js"></script>
+<script src="{$tpl_dir}/js/scrollup.js"></script>	
+<script src="{$tpl_dir}/js/jquery.slimscroll.js"></script>	
+<script src="{$tpl_dir}/js/smart-resize.js"></script>
+<script src="{$tpl_dir}/js/blockui.min.js"></script>		
+<script src="{$tpl_dir}/js/wow.min.js"></script>					
+<script src="{$tpl_dir}/js/fancybox.min.js"></script>
+<script src="{$tpl_dir}/js/venobox.js"></script>
+<script src="{$tpl_dir}/js/forms/uniform.min.js"></script>
+<script src="{$tpl_dir}/js/forms/switchery.js"></script>
+<script src="{$tpl_dir}/js/forms/select2.min.js"></script>	
+<script src="{$tpl_dir}/js/core.js"></script>
+<!-- /global scripts -->	
+<!-- Page scripts -->
+<script src="{$tpl_dir}/js/tables/datatables/datatables.min.js"></script>
+<script src="{$tpl_dir}/js/pages/datatable_basic.js"></script>
+<script src="https://www.google.com/jsapi"></script>
+<script src="{$tpl_dir}/js/pages/dashboard_minimalistic.js"></script>
+<script type="text/javascript" src="{$tpl_dir}/js/jquery.cropit.js"></script>  
+        
+<!-- iCheck -->
+<link rel="stylesheet" href="{$tpl_dir}/js/iCheck/square/blue.css">
+<script src="{$tpl_dir}/js/iCheck/icheck.min.js"></script>  
+
+    <script type="text/javascript">
+        $(function () {           
+            $('input').iCheck({
+                checkboxClass: 'icheckbox_square-blue',
+                radioClass: 'iradio_square-blue',
+                increaseArea: '20%' // optional
+            });
+            
+            var isEdit = {if $isEdit eq true}true{else}false{/if};
+
+            var setLoading = function(isLoading) {
+                if(isLoading) {
+                    $('#i_loading').show();
+                    $('#btn_simpan').hide();
+                    $('#btn_batal').hide();
+                } else {
+                    $('#i_loading').hide();
+                    $('#btn_simpan').show(); 
+                    $('#btn_batal').show();                    
+                }
+            }
+
+            $('#upload_gambar').click(function(){
+                $('#fileupload_gambar').trigger('click'); 
+                return false;
+            });
+            
+            $('.image-editor').cropit({
+              smallImage: 'stretch',
+              imageState: {
+                src: '{$homeurl}/uploads/ekspedisi/{if $data[0].gambar neq ''}{$data[0].gambar}{else}default.png{/if}',
+              }
+            });
+            
+            var setErrorMessage = function(message) {
+
+                $('#alert_error .alert').text(message);
+                $('#alert_error').show('slow');
+                setTimeout(function() {
+                    $('#alert_error').hide('slow');
+                }, 5000);
+
+                $("body, html").animate({ 
+                    scrollTop: $('#wrapper').offset().top 
+                }, 600);
+            };
+
+            var is_aktif = "{if $data[0].status eq ''}N{else}{$data[0].status}{/if}";        
+            $('input[name=status]').on('ifChecked', function(event){
+                is_aktif = $(this).val();
+            });
+        
+            $('#btn_submit').click(function() {
+               
+                var data = new FormData();
+                data.append('id', isEdit?'{$data[0].id}':'');
+                data.append('kode', $('[name=kode]').val());
+                data.append('nama', $('[name=nama]').val());
+                var imageData = $('.image-editor').cropit('export');
+                data.append('filename_gambar', imageData==undefined?'':imageData);
+                data.append('is_aktif', is_aktif);
+
+                setLoading(true);
+                $.ajax({
+                    type: 'POST',
+                    url: isEdit?'update.php':'save.php',
+                    data: data,
+                    cache: false,
+                    dataType: 'json',
+                    processData: false, // Don't process the files
+                    contentType: false, // Set content type to false as jQuery will tell the server its a query string request
+                    success: function(data) {
+                        setLoading(false);
+                        if(data['success']) {
+                            window.location = 'list.php?tab=dataekspedisi';
+                        } else {
+                            setErrorMessage(data['message']);                        
+                        }
+                    }, 
+
+                    error: function() {
+                        setLoading(false);
+                        setErrorMessage('Kesalahan server. Mohon diulang kembali!');
+                    }
+                }); 
+            });
+        });
+
+    </script>
+</body>{include file="$include_tpl/includes/footer_js.html"}
+</html>

@@ -1,0 +1,2287 @@
+{include file="$include_tpl/includes/head.html"}
+	<!--sidebar-->
+	{include file="$include_tpl/includes/sidebar.html"}
+	<!--/sidebar-->
+	<!--Page Container-->
+	<section class="main-container">	
+			<!--Page Header-->
+			<div class="header">
+				<div class="header-content">
+					<div class="page-title">
+						<i class="icon-table position-left"></i> {$title}
+					</div>
+					<ul class="breadcrumb">
+						<li><a href="{$adminweburl}">Beranda</a></li>
+						<li><a href="{$adminweburl}/pengaturan/">{$title}</a></li>
+						<li class="active">{$sub_title}</li>
+					</ul>					
+				</div>
+			</div>		
+			<!--/Page Header-->
+			
+			<div class="container-fluid page-content">
+				
+				<div class="row">
+					<div class="col-md-12">
+						<div class="panel panel-flat">
+							<div class="panel-heading">
+								<h3 class="panel-title"><strong>{$title}</strong></h3>				
+								<h5 class="panel-title">{$sub_title}</h5>			
+							</div>
+
+							<div class="panel-body no-padding-bottom">
+                    <div class="form-group">
+
+                        <ul id="myTab" class="nav nav-tabs">                                
+
+                            <li class="active">
+
+                                <a href="#umum" data-toggle="tab"><b>Data Umum</b></a>
+
+                            </li>                                 
+
+                            <li>
+
+                                <a href="#alamat" data-toggle="tab"><b>Alamat Toko</b></a>
+
+                            </li>                                
+
+                            <li>
+
+                                <a href="#pengaturan" data-toggle="tab"><b>Umum</b></a>
+
+                            </li>
+                            
+                            <li>
+
+                                <a href="#pelanggan" data-toggle="tab"><b>Registrasi Pelanggan</b></a>
+
+                            </li>
+
+                            <li>
+
+                                <a href="#freeongkir" data-toggle="tab"><b>Free Ongkir</b></a>
+
+                            </li>
+
+                            <li>
+
+                                <a href="#syaratkondisi" data-toggle="tab"><b>Syarat &amp; Ketentuan</b></a>
+
+                            </li> 
+
+                        </ul>
+
+                    </div>
+
+                    
+
+                    <div id="alert_success" class="form-group" style="display: none;">                         
+
+                        <div class="alert alert-info">&nbsp;</div>
+
+                    </div>
+
+                
+
+                    <div id="alert_error" class="form-group" style="display: none;">                         
+
+                        <div class="alert alert-danger">&nbsp;</div>
+
+                    </div>
+
+                    
+
+                    <div class="form-group tab-content">
+
+                        <div class="tab-pane fade active in" id="umum">
+
+                            <div class="form-group">&nbsp;</div>
+
+                            <div class="form-group">
+
+                                <label for="judul">Judul Webite:</label>
+
+                                <input type="text" value="{if $isEdit eq true}{$data[0].judul}{/if}" class="form-control" name="judul" placeholder="" />
+
+                            </div>
+
+
+
+                            <div class="form-group">
+
+                                <label for="tagline">Tag Line:</label>
+
+                                <input type="text" value="{if $isEdit eq true}{$data[0].tagline}{/if}" class="form-control" name="tagline" placeholder="" />
+
+                            </div>
+
+                            
+
+                            <div class="form-group">
+
+                                <label for="detail">Tentang Website:</label>
+
+                                <div class="summernote"></div>
+
+                            </div>
+
+                            <div class="form-group">
+
+                                <label for="admin">Avatar Admin:</label>                        
+                                <style type="text/css">
+                                    .preview-avatar {
+                                        border:1px solid #a6bac4;
+                                        width: 180px;
+                                        height: 180px;
+                                        cursor: move;
+                                    }
+
+                                    .post-img-avatar {
+                                        width: 180px;
+                                        height: 180px;
+                                    }
+
+                                </style>
+
+                                <div class="image-editor-avatar post-img-avatar">
+                                    <input id="fileupload_avatar" type="file" name="fileupload_avatar" style="display:none;" class="cropit-image-input" />
+                                    <div class="cropit-image-preview preview-avatar"></div>
+                                </div>
+
+                                <label>Ukuran 180 X 180 px</label><br />   
+                                <div id="upload_avatar" class="btn btn-primary">Upload</div>
+
+                             </div>
+
+                            <div class="form-group">
+
+                                <label for="logo">Logo:</label>                        
+                                <style type="text/css">
+                                    .preview-logo {
+                                        border:1px solid #a6bac4;
+                                        width: 227px;
+                                        height: 73px;
+                                        cursor: move;
+                                    }
+
+                                    .post-img-logo {
+                                        width: 227px;
+                                        height: 73px;
+                                    }
+
+                                </style>
+
+                                <div class="image-editor-logo post-img-logo">
+                                    <input id="fileupload_logo" type="file" name="fileupload_logo" style="display:none;" class="cropit-image-input" />
+                                    <div class="cropit-image-preview preview-logo"></div>
+                                </div>
+
+                                <label>Ukuran 227 X 73 px</label><br />   
+                                <div id="upload_logo" class="btn btn-primary">Upload</div>
+
+                             </div>
+
+                            <div class="form-group">
+                                <label for="bg">Splash Screen Background (untuk android):</label>                        
+
+                                <style type="text/css">
+                                    .preview-bg {
+                                        border:1px solid #a6bac4;
+                                        width: 320px;
+                                        height: 569px;
+                                        cursor: move;
+                                    }
+
+                                    .post-img-bg {
+                                        width: 320px;
+                                        height: 569px;
+                                    }
+                                </style>
+
+                                <div class="image-editor-bg post-img-bg">
+                                    <input id="fileupload_bg" type="file" name="fileupload_bg" style="display:none;" class="cropit-image-input" />
+                                    <div class="cropit-image-preview preview-bg"></div>
+                                </div>
+
+                                <label>Ukuran 320 X 569 px</label><br />   
+                                <div id="upload_bg" class="btn btn-primary">Upload</div>
+                             </div>
+
+                            <div class="form-group">
+
+                                <label for="landing_page">Landing Page (untuk android):</label>
+
+                                <select id="propinsi" name="landing_page" class="form-control">
+
+                                    <option value="0" {if $data[0].landing_page eq 0} selected="selected" {/if}>Beranda</option>
+                                    <option value="1" {if $data[0].landing_page eq 1} selected="selected" {/if}>Login</option>
+                                    
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+
+                                <label for="tampilkan_shortcut">Tampilkan Shortcut (untuk android):</label>
+
+                                <select id="tampilkan_shortcut" name="tampilkan_shortcut" class="form-control">
+
+                                    <option value="0" {if $data[0].tampilkan_shortcut eq 0} selected="selected" {/if}>Tidak</option>
+                                    <option value="1" {if $data[0].tampilkan_shortcut eq 1} selected="selected" {/if}>Tampilkan</option>
+                                    
+                                </select>
+                            </div>
+                            
+                            
+                            <div class="form-group">
+
+                                <label for="tampilkan_kategori">Tampilkan Kategori (untuk android):</label>
+
+                                <select id="tampilkan_kategori" name="tampilkan_kategori" class="form-control">
+
+                                    <option value="0" {if $data[0].tampilkan_kategori eq 0} selected="selected" {/if}>Tidak</option>
+                                    <option value="1" {if $data[0].tampilkan_kategori eq 1} selected="selected" {/if}>Tampilkan</option>
+                                    
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+
+                                <label for="tampilkan_induk_kategori">Tampilkan Induk Kategori (untuk android):</label>
+
+                                <select id="tampilkan_induk_kategori" name="tampilkan_induk_kategori" class="form-control">
+
+                                    <option value="0" {if $data[0].tampilkan_induk_kategori eq 0} selected="selected" {/if}>Tidak</option>
+                                    <option value="1" {if $data[0].tampilkan_induk_kategori eq 1} selected="selected" {/if}>Tampilkan</option>
+                                    
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+
+                                <label for="email">Email:</label>
+
+                                <input type="text" value="{if $isEdit eq true}{$data[0].email}{/if}" class="form-control" name="email" placeholder="" />
+
+                            </div>
+
+                            
+
+                            <div class="form-group">                        
+
+                                <label for="telepon">Telepon:</label>
+
+                                <div id="detail_telepon" class="table-responsive">
+
+                                    <table id="tblTelepon" width="100%">
+
+                                        <tbody id="telepon"></tbody>
+
+                                    </table>
+
+                                </div>
+
+                            </div>
+
+                            
+
+                            <div class="form-group">                        
+
+                                <label for="no_hp">No. HP:</label>
+
+                                <div id="detail_no_hp" class="table-responsive">
+
+                                    <table id="tblNo_hp" width="100%">
+
+                                        <tbody id="no_hp"></tbody>
+
+                                    </table>
+
+                                </div>
+
+                            </div>
+
+                            
+
+                            <div class="form-group">                        
+
+                                <label for="sms">SMS:</label>
+
+                                <div id="detail_sms" class="table-responsive">
+
+                                    <table id="tblSms" width="100%">
+
+                                        <tbody id="sms"></tbody>
+
+                                    </table>
+
+                                </div>
+
+                            </div>
+
+                            
+
+                            <div class="form-group">                        
+
+                                <label for="wa">WA:</label>
+
+                                <div id="detail_wa" class="table-responsive">
+
+                                    <table id="tblWa" width="100%">
+
+                                        <tbody id="wa"></tbody>
+
+                                    </table>
+
+                                </div>
+
+                            </div>
+
+                            
+
+                            <div class="form-group">                        
+
+                                <label for="bbm">BBM:</label>
+
+                                <div id="detail_bbm" class="table-responsive">
+
+                                    <table id="tblBbm" width="100%">
+
+                                        <tbody id="bbm"></tbody>
+
+                                    </table>
+
+                                </div>
+
+                            </div>
+
+                            
+
+                            <div class="form-group">                        
+
+                                <label for="line">Line:</label>
+
+                                <div id="detail_line" class="table-responsive">
+
+                                    <table id="tblLine" width="100%">
+
+                                        <tbody id="line"></tbody>
+
+                                    </table>
+
+                                </div>
+
+                            </div>
+
+                            
+
+                            <div class="form-group">&nbsp;</div>
+
+                            <div class="form-group">
+
+                                <div id="i_loading_umum" class="G-btn-animation" style="display: none;"><img src="{$tpl_dir}/assets/img/loading.gif" /></div>                  
+
+                                {if 'E'|in_array:$array_akses}<div id="btn_simpan_umum" class="btn btn-primary">Update</div>{/if}
+
+                            </div>
+
+                            
+
+                        </div>
+
+                        
+
+                        <div class="tab-pane fade" id="alamat">
+
+                            <div class="form-group">&nbsp;</div>
+
+                            <div class="form-group">
+
+                                <label for="alamat">Alamat Toko:</label>
+
+                                <textarea class="form-control" style="height: 50px;" name="alamat">{if $isEdit eq true}{$data[0].alamat}{/if}</textarea>
+
+                            </div>
+
+                            
+
+                            <div class="form-group">
+
+                                <label for="propinsi">Propinsi:</label>
+
+                                <select id="propinsi" name="propinsi" class="form-control">
+
+                                    {foreach $listpropinsi as $entry}
+
+                                        <option value="{$entry.province_id}" {if $entry.province_id eq $data[0].propinsi} selected="selected" {/if}>{$entry.province}</option>
+
+                                    {/foreach}
+
+                                </select>
+
+                            </div>
+
+
+
+                            <div class="form-group">
+
+                                <label for="kota">Kota:</label>
+
+                                <select id="kota" name="kota" class="form-control"></select>
+
+                            </div>
+
+                            
+
+                            <div class="form-group">
+
+                                <label for="kode_pos">Kode Pos:</label>
+
+                                <input type="text" value="{if $isEdit eq true}{$data[0].kode_pos}{/if}" class="form-control" name="kode_pos" />
+
+                            </div>
+
+                            
+
+                            
+
+                            <div class="form-group">
+
+                                <label for="latitude">Latitude:</label>
+
+                                <input type="text" value="{if $isEdit eq true}{$data[0].latitude}{/if}" class="form-control" name="latitude" />
+
+                            </div>
+
+                            
+
+                            <div class="form-group">
+
+                                <label for="longitude">Longitude:</label>
+
+                                <input type="text" value="{if $isEdit eq true}{$data[0].longitude}{/if}" class="form-control" name="longitude" />
+
+                            </div>
+
+                            
+
+                            <div class="form-group">&nbsp;</div>
+
+                            <div class="form-group">
+
+                                <div id="i_loading_alamat" class="G-btn-animation" style="display: none;"><img src="{$tpl_dir}/assets/img/loading.gif" /></div>                  
+
+                                {if 'E'|in_array:$array_akses}<div id="btn_simpan_alamat" class="btn btn-primary">Update</div>{/if}
+
+                            </div>
+
+                        </div>
+
+                            
+
+                        
+
+                        <div class="tab-pane fade" id="pengaturan">
+
+                            <div class="form-group">&nbsp;</div>
+
+                            
+
+                            <div class="form-group">
+
+                                <label for="jatuh_tempo">Jatuh Tempo Pemesanan:</label>
+
+                                <select name="jatuh_tempo" class="form-control">
+
+                                    <option value="1" {if $data[0].jatuh_tempo eq "1"} selected="selected" {/if}>1 Hari</option>
+
+                                    <option value="2" {if $data[0].jatuh_tempo eq "2"} selected="selected" {/if}>2 Hari</option>
+
+                                    <option value="3" {if $data[0].jatuh_tempo eq "3"} selected="selected" {/if}>3 Hari</option>
+
+                                    <option value="4" {if $data[0].jatuh_tempo eq "4"} selected="selected" {/if}>4 Hari</option>
+
+                                    <option value="5" {if $data[0].jatuh_tempo eq "5"} selected="selected" {/if}>5 Hari</option>
+
+                                    <option value="6" {if $data[0].jatuh_tempo eq "6"} selected="selected" {/if}>6 Hari</option>
+
+                                    <option value="7" {if $data[0].jatuh_tempo eq "7"} selected="selected" {/if}>7 Hari</option>                                    
+
+                                </select>
+
+                            </div>
+
+                            <div class="form-group">
+
+                                <label for="stok_minimum">Peringatan Stok Minimum:</label>
+
+                                <input type="text" value="{if $isEdit eq true}{$data[0].stok_minimum}{/if}" class="form-control" name="stok_minimum" />
+
+                            </div>
+
+                            
+
+                            <div class="form-group">
+
+                                <label class="control-label"><input type="checkbox" id="checkbox_tampilkan_stok" name="tampilkan_stok" value="1" {if $data[0].is_tampilkan_stok eq 'Y'}checked{/if}> Tampilkan stok pada detail produk.</label>                    
+
+                            </div>
+
+                            <div class="form-group">
+
+                                <label for="status_stok">Status Stok:</label>
+
+                                <select id="propinsi" name="status_stok" class="form-control">
+
+                                    <option value="0" {if $data[0].status_stok eq 0} selected="selected" {/if}>Real Stok</option>
+                                    <option value="1" {if $data[0].status_stok eq 1} selected="selected" {/if}>Status</option>
+                                    
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+
+                                <label for="parameter_status">Parameter Stok:</label>
+
+                                <input type="text" value="{if $isEdit eq true}{$data[0].parameter_status}{/if}" class="form-control" name="parameter_status" />
+
+                            </div>
+                            
+                            <div class="form-group">
+
+                                <label for="jam">Produk Keep (JAM):</label>
+
+                                <input type="text" value="{if $isEdit eq true}{$data[0].jam}{/if}" class="form-control" name="jam" />
+
+                            </div>
+                            
+                            <div class="form-group">
+
+                                <label for="menit">Produk Keep (MENIT):</label>
+
+                                <input type="text" value="{if $isEdit eq true}{$data[0].menit}{/if}" class="form-control" name="menit" />
+
+                            </div>
+
+                            <div class="form-group">&nbsp;</div>
+
+                            <div class="form-group">
+
+                                <div id="i_loading_pengaturan" class="G-btn-animation" style="display: none;"><img src="{$tpl_dir}/assets/img/loading.gif" /></div>                  
+
+                                {if 'E'|in_array:$array_akses}<div id="btn_simpan_pengaturan" class="btn btn-primary">Update</div>{/if}
+
+                            </div>
+
+                        </div>
+                        
+                        <div class="tab-pane fade" id="pelanggan">
+
+                            <div class="form-group">&nbsp;</div>
+
+                            
+
+                            <div class="form-group">
+
+                                <label for="sms">Aktivasi Oleh SMS:</label>
+
+                                <select name="aktivasi_sms" class="form-control">
+
+                                    <option value="0" {if $data[0].aktivasi_sms eq "0"} selected="selected" {/if}>Tidak Aktif</option>
+
+                                    <option value="1" {if $data[0].aktivasi_sms eq "1"} selected="selected" {/if}>Aktif</option>
+                                    
+                                </select>
+
+                            </div>
+
+                            <div class="form-group">
+
+                                <label for="admin">Aktivasi Oleh Admin:</label>
+
+                                <select name="aktivasi_admin" class="form-control">
+
+                                    <option value="0" {if $data[0].aktivasi_sms eq "0"} selected="selected" {/if}>Tidak Aktif</option>
+
+                                    <option value="1" {if $data[0].aktivasi_sms eq "1"} selected="selected" {/if}>Aktif</option>
+                                    
+                                </select>
+
+                            </div>
+
+                            <div class="form-group">&nbsp;</div>
+
+                            <div class="form-group">
+
+                                <div id="i_loading_pelanggan" class="G-btn-animation" style="display: none;"><img src="{$tpl_dir}/assets/img/loading.gif" /></div>                  
+
+                                {if 'E'|in_array:$array_akses}<div id="btn_simpan_pelanggan" class="btn btn-primary">Update</div>{/if}
+
+                            </div>
+
+                        </div>
+
+                        <div class="tab-pane fade" id="freeongkir">
+
+                            <div class="form-group">&nbsp;</div>
+
+                            <div class="form-group">
+
+                                <label for="is_aktif_freeongkir">Aktifkan Free Ongkir:</label>
+
+                                <select name="is_aktif_freeongkir" class="form-control">
+
+                                    <option value="0" {if $data[0].is_aktif_freeongkir eq "0"} selected="selected" {/if}>Tidak Aktif</option>
+
+                                    <option value="1" {if $data[0].is_aktif_freeongkir eq "1"} selected="selected" {/if}>Aktif</option>                                
+
+                                </select>
+
+                            </div>
+                            
+                            <div class="form-group">
+
+                                <label for="all_produk_freeongkir">Free Ongkir Untuk Semua Produk:</label>
+
+                                <select name="all_produk_freeongkir" class="form-control">
+
+                                    <option value="0" {if $data[0].all_produk_freeongkir eq "0"} selected="selected" {/if}>Tidak</option>
+
+                                    <option value="1" {if $data[0].all_produk_freeongkir eq "1"} selected="selected" {/if}>Ya</option>                                
+
+                                </select>
+
+                            </div>
+
+                            <div class="form-group">
+
+                                <label for="min_pembelian_freeongkir">Jumlah Minimum Pembelian (Rp.):</label>
+
+                                <input type="text" value="{if $isEdit eq true}{$data[0].min_pembelian_freeongkir}{/if}" class="form-control harga" name="min_pembelian_freeongkir" />
+
+                            </div>
+
+                            <div class="form-group">
+                                <label for="kurir_freeongkir">Jenis Kurir Free Ongkir:</label>
+                                <select multiple class="form-control" name="kurir_freeongkir" style="height: 200px;">
+                                    {foreach $datakurir as $entry}
+                                        <option value="{$entry.id}" {if $isEdit eq true && $entry.is_select eq 'Y'} selected="selected" {/if}>{$entry.kode}</option>                                        
+                                    {/foreach}                            
+                                </select>
+                                <label>Gunakan tombol Ctrl untuk pilih lebih dari 1 kurir.</label>
+                            </div>
+                            
+
+                            <div id="list_tujuan" class="table-responsive" style="margin-top: 10px;">
+
+                                <div class="form-group">
+
+                                    <label for="detail_tujuan">Tujuan Free Ongkir:</label>
+
+                                    <table  id="tblDetail_tujuan" class="table table-striped table-bordered table-hover" width="100%">
+
+                                        <thead>
+                                            <tr>
+                                                <th width="5px"><span class="fa fa-trash-o"></span></th>
+                                                <th width="50%"><div style="text-align: left;">Propinsi</div></th>
+                                                <th width="50%"><div style="text-align: left;">Kota</div></th> 
+                                            </tr>
+                                        </thead>
+
+                                        <tbody id="detail_tujuan">
+
+                                        </tbody>
+
+                                    </table>
+
+                                </div>
+
+
+
+                                <div class="form-group">
+
+                                    <div id='btn_add_tujuan' class="btn btn-primary">Tambah</div>
+
+                                    <!-- div id='btn_update_cart' class="btn btn-warning">UPDATE CART</div -->
+
+                                </div>                        
+
+                            </div>
+
+                            <div class="form-group">&nbsp;</div>
+
+                            <div class="form-group">
+
+                                <div id="i_loading_freeongkir" class="G-btn-animation" style="display: none;"><img src="{$tpl_dir}/assets/img/loading.gif" /></div>                  
+
+                                {if 'E'|in_array:$array_akses}<div id="btn_simpan_freeongkir" class="btn btn-primary">Update</div>{/if}
+
+                            </div>
+
+                        </div>
+
+                        <div class="tab-pane fade" id="syaratkondisi">
+
+                            <div class="form-group">
+
+                                <div class="summernote_syaratkondisi"></div>
+
+                            </div>
+
+                            <div class="form-group">&nbsp;</div>
+
+                            <div class="form-group">
+
+                                <div id="i_loading_syaratkondisi" class="G-btn-animation" style="display: none;"><img src="{$tpl_dir}/assets/img/loading.gif" /></div>                  
+
+                                {if 'E'|in_array:$array_akses}<div id="btn_simpan_syaratkondisi" class="btn btn-primary">Update</div>{/if}
+
+                            </div>
+
+                        </div>
+
+                    </div>							
+						</div>
+					</div>
+				</div>
+	
+			<!--Rightbar Chat-->
+			<aside class="rightbar">
+				<div class="rightbar-container">
+					<div class="right-chat-bar">
+						<div class="coversation-header">
+							<div class="chat-back" data-popup="tooltip" data-placement="left" title="Back">
+								<i class="icon-arrow-left12"></i>
+							</div>
+							<div class="active-conversation">
+								<div class="chat-avatar">
+									<img src="assets/images/faces/face12.png" alt="user">
+								</div>
+								<div class="chat-user-status">
+									<ul>
+										<li class="text-semibold"> John Parker</li>
+										<li><small>Online</small></li>
+									</ul>
+								</div>
+							</div>
+							<div class="conversation-actions">
+								<ul>
+									<li><i class="icon-phone-wave" data-popup="tooltip" data-placement="bottom" title="Call"></i></li>
+									<li><i class="icon-attachment" data-popup="tooltip" data-placement="bottom" title="Send file"></i></li>
+									<li><i class="icon-mic2" data-popup="tooltip" data-placement="bottom" title="Send voice"></i></li>
+									<li><i class="icon-user-block" data-popup="tooltip" data-placement="bottom" title="Block"></i></li>					
+								</ul>
+							</div>
+						</div>
+						<div class="conversation-container">
+							<div class="conversation-row even">
+								<ul class="conversation-list">
+									<li>
+										<p>
+											Lorem ipsum dolor sit amet?
+										</p>
+									</li>							
+								</ul>
+							</div>
+							<div class="conversation-row odd">
+								<ul class="conversation-list">
+									<li>
+										<p>
+											Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus
+										</p>
+									</li>
+								</ul>
+							</div>
+							<div class="conversation-row even">
+								<ul class="conversation-list">
+									<li>
+										<p>
+											Maecenas nec odio et ante tincidunt tempus. 
+										</p>
+									</li>
+								</ul>
+							</div>
+							<div class="conversation-row even">
+								<ul class="conversation-list">
+									<li>						
+										<a href="assets/images/demo/pic7.jpg" class="venobox"><img src="assets/images/demo/pic7.jpg" alt=""/></a>
+									</li>
+								</ul>
+							</div>
+							<div class="conversation-row odd">
+								<ul class="conversation-list">
+									<li>
+										<p>
+											Donec sodales :)
+										</p>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="chat-text-input">			
+							<div class="input-group">
+								<input type="text" class="form-control input-xs" placeholder="Type a message...">
+								<span class="input-group-btn">
+								<button class="btn btn-default" type="button"><i class="icon-enter5"></i></button>
+								</span>
+							</div>
+						</div>
+					</div>
+					
+					<div class="chat-user-toolbar clearfix">
+						<div class="chat-user-search pull-left">
+							<span class="addon-icon"><i class="icon-search4"></i></span>
+							<input type="text" class="form-control" placeholder="Search">
+						</div>
+						<div class="add-chat-list pull-right">
+							<i class="icon-user-plus" data-toggle="tooltip" data-placement="left" title="Add new user"></i>
+						</div>
+					</div>
+					
+					<div class="chat-user-container">			
+						<ul class="chat-user-list">
+							<li>
+								<div><span class="chat-avatar"><img src="assets/images/faces/face1.png" alt="Avatar"></span><span class="chat-u-info">Jane Elliott<cite>Li Europan lingues es...</cite></span>
+								</div>
+								<span class="chat-u-status"><i class="icon icon-circles"></i></span>
+							</li>
+							<li>
+								<div><span class="chat-avatar"><img src="assets/images/faces/face2.png" alt="Avatar"></span><span class="chat-u-info">Florence Douglas<cite>Busy</cite></span>
+								</div>
+								<span class="chat-u-status"><i class="icon icon-circles"></i></span>
+							</li>
+							<li class="chat-u-online">
+								<div><span class="chat-avatar"><img src="assets/images/faces/face3.png" alt="Avatar"></span><span class="chat-u-info">Jacqueline Howell<cite>Available</cite></span>
+								</div>
+								<span class="chat-u-status"><i class="icon icon-circles"></i></span>
+							</li>
+							<li class="chat-u-online">
+								<div><span class="chat-avatar"><img src="assets/images/faces/face4.png" alt="Avatar"></span><span class="chat-u-info">Eugine Turner<cite>Occidental in fact...</cite></span>
+								</div>
+								<span class="chat-u-status"><i class="icon icon-circles"></i></span>
+							</li>
+							<li class="chat-u-busy">
+								<div><span class="chat-avatar"><img src="assets/images/faces/face5.png" alt="Avatar"></span><span class="chat-u-info">Andrew Brewer<cite>Busy</cite></span>
+								</div>
+								<span class="chat-u-status"><i class="icon icon-circles"></i></span>
+							</li>
+							<li class="chat-u-away">
+								<div><span class="chat-avatar"><img src="assets/images/faces/face6.png" alt="Avatar"></span><span class="chat-u-info">Jonaly Smith<cite>Available</cite></span>
+								</div>
+								<span class="chat-u-status"><i class="icon icon-circles"></i></span>
+							</li>
+							<li class="chat-u-online">
+								<div><span class="chat-avatar"><img src="assets/images/faces/face7.png" alt="Avatar"></span><span class="chat-u-info">Ann Porter<cite>Available</cite></span>
+								</div>
+								<span class="chat-u-status"><i class="icon icon-circles"></i></span>
+							</li>
+							<li class="chat-u-away">
+								<div><span class="chat-avatar"><img src="assets/images/faces/face8.png" alt="Avatar"></span><span class="chat-u-info">John Deo<cite>Do not disturb</cite></span>
+								</div>
+								<span class="chat-u-status"><i class="icon icon-circles"></i></span>
+							</li>
+							<li>
+								<div><span class="chat-avatar"><img src="assets/images/faces/face9.png" alt="Avatar"></span><span class="chat-u-info">Marilyn Romero<cite>On refusa continuar payar...</cite></span>
+								</div>
+								<span class="chat-u-status"><i class="icon icon-circles"></i></span>
+							</li>
+							<li>
+								<div><span class="chat-avatar"><img src="assets/images/faces/face10.png" alt="Avatar"></span><span class="chat-u-info">Carol Gibson<cite>Gone for a weekend</cite></span>
+								</div>
+								<span class="chat-u-status"><i class="icon icon-circles"></i></span>
+							</li>
+							<li>
+								<div><span class="chat-avatar"><img src="assets/images/faces/face11.png" alt="Avatar"></span><span class="chat-u-info">Scott Ruiz<cite>At solmen va esser...</cite></span>
+								</div>
+								<span class="chat-u-status"><i class="icon icon-circles"></i></span>
+							</li>
+						</ul>						
+					</div>		
+				</div>
+			</aside>
+			<!--/Rightbar Chat-->
+				
+		</div>
+	
+		<!--Footer -->
+		{include file="$include_tpl/includes/footer.html"}
+		<!--/Footer-->
+		
+	</section>
+	<!--/Page Container-->
+	
+	<!-- div class="theme-switcher">
+		<span class="theme-switcher-icon">
+			<i class="icon icon-color-sampler"></i>
+		</span>
+		
+		<div class="themes-container">
+			<ul class="switch-theme-colors clearfix">
+				<li class="list-title">Light</li>
+				<li>
+					<div class="theme" id="light">
+						<img src="{$tpl_dir}/assets/images/themes/light.jpg" alt=""/>
+					</div>				
+				</li>
+				<li class="list-title clearfix">Mirage</li>
+				<li>
+					<div class="theme pull-left" id="mirage">
+						<img src="{$tpl_dir}/assets/images/themes/mirage_dark.jpg" alt=""/>
+					</div>				
+				</li>			
+				<li>
+					<div class="theme pull-left" id="mirage_light">
+						<img src="{$tpl_dir}/assets/images/themes/mirage_light.jpg" alt=""/>
+					</div>				
+				</li>
+				<li>
+					<div class="theme pull-left" id="mirage_light_sidebar">
+						<img src="{$tpl_dir}/assets/images/themes/mirage_light_sidebar.jpg" alt=""/>
+					</div>				
+				</li>										
+				<li class="list-title clearfix">Burnt Sienna</li>
+				<li>
+					<div class="theme pull-left" id="burnt_sienna_dark">
+						<img src="{$tpl_dir}/assets/images/themes/burnt_sienna_dark.jpg" alt=""/>
+					</div>				
+				</li>			
+				<li>
+					<div class="theme pull-left" id="burnt_sienna_light">
+						<img src="{$tpl_dir}/assets/images/themes/burnt_sienna_light.jpg" alt=""/>
+					</div>				
+				</li>
+				<li>
+					<div class="theme pull-left" id="burnt_sienna_light_sidebar">
+						<img src="{$tpl_dir}/assets/images/themes/burnt_sienna_light_sidebar.jpg" alt=""/>
+					</div>				
+				</li>		
+
+				<li class="list-title clearfix">Amethyst</li>
+				<li>
+					<div class="theme pull-left" id="amethyst_dark">
+						<img src="{$tpl_dir}/assets/images/themes/amethyst_dark.jpg" alt=""/>
+					</div>				
+				</li>			
+				<li>
+					<div class="theme pull-left" id="amethyst_light">
+						<img src="{$tpl_dir}/assets/images/themes/amethyst_light.jpg" alt=""/>
+					</div>				
+				</li>
+				<li>
+					<div class="theme pull-left" id="amethyst_light_sidebar">
+						<img src="{$tpl_dir}/assets/images/themes/amethyst_light_sidebar.jpg" alt=""/>
+					</div>				
+				</li>		
+
+				<li class="list-title clearfix">Fuchsia Blue</li>
+				<li>
+					<div class="theme pull-left" id="fuchsiablue_dark">
+						<img src="{$tpl_dir}/assets/images/themes/fuchsiablue_dark.jpg" alt=""/>
+					</div>				
+				</li>			
+				<li>
+					<div class="theme pull-left" id="fuchsiablue_light">
+						<img src="{$tpl_dir}/assets/images/themes/fuchsiablue_light.jpg" alt=""/>
+					</div>				
+				</li>
+				<li>
+					<div class="theme pull-left" id="fuchsiablue_light_sidebar">
+						<img src="{$tpl_dir}/assets/images/themes/fuchsiablue_light_sidebar.jpg" alt=""/>
+					</div>				
+				</li>
+
+				<li class="list-title clearfix">Picton Blue</li>
+				<li>
+					<div class="theme pull-left" id="pictonblue_dark">
+						<img src="{$tpl_dir}/assets/images/themes/pictonblue_dark.jpg" alt=""/>
+					</div>				
+				</li>			
+				<li>
+					<div class="theme pull-left" id="pictonblue_light">
+						<img src="{$tpl_dir}/assets/images/themes/pictonblue_light.jpg" alt=""/>
+					</div>				
+				</li>
+				<li>
+					<div class="theme pull-left" id="pictonblue_light_sidebar">
+						<img src="{$tpl_dir}/assets/images/themes/pictonblue_light_sidebar.jpg" alt=""/>
+					</div>				
+				</li>
+				
+				<li class="list-title clearfix">Jungle Green</li>
+				<li>
+					<div class="theme pull-left" id="junglegreen_dark">
+						<img src="{$tpl_dir}/assets/images/themes/junglegreen_dark.jpg" alt=""/>
+					</div>				
+				</li>			
+				<li>
+					<div class="theme pull-left" id="junglegreen_light">
+						<img src="{$tpl_dir}/assets/images/themes/junglegreen_light.jpg" alt=""/>
+					</div>				
+				</li>
+				<li>
+					<div class="theme pull-left" id="junglegreen_light_sidebar">
+						<img src="{$tpl_dir}/assets/images/themes/junglegreen_light_sidebar.jpg" alt=""/>
+					</div>				
+				</li>
+				
+				<li class="list-title clearfix">Fern</li>
+				<li>
+					<div class="theme pull-left" id="fern_dark">
+						<img src="{$tpl_dir}/assets/images/themes/fern_dark.jpg" alt=""/>
+					</div>				
+				</li>			
+				<li>
+					<div class="theme pull-left" id="fern_light">
+						<img src="{$tpl_dir}/assets/images/themes/fern_light.jpg" alt=""/>
+					</div>				
+				</li>
+				<li>
+					<div class="theme pull-left" id="fern_light_sidebar">
+						<img src="{$tpl_dir}/assets/images/themes/fern_light_sidebar.jpg" alt=""/>
+					</div>				
+				</li>
+				
+				<li class="list-title clearfix">Sunglow</li>
+				<li>
+					<div class="theme pull-left" id="sunglow_dark">
+						<img src="{$tpl_dir}/assets/images/themes/sunglow_dark.jpg" alt=""/>
+					</div>				
+				</li>			
+				<li>
+					<div class="theme pull-left" id="sunglow_light">
+						<img src="{$tpl_dir}/assets/images/themes/sunglow_light.jpg" alt=""/>
+					</div>				
+				</li>
+				<li>
+					<div class="theme pull-left" id="sunglow_light_sidebar">
+						<img src="{$tpl_dir}/assets/images/themes/sunglow_light_sidebar.jpg" alt=""/>
+					</div>				
+				</li>
+				
+				<li class="list-title clearfix">Regent Grey</li>
+				<li>
+					<div class="theme pull-left" id="regentgrey_dark">
+
+						<img src="{$tpl_dir}/assets/images/themes/regentgrey_dark.jpg" alt=""/>
+					</div>				
+				</li>			
+				<li>
+					<div class="theme pull-left" id="regentgrey_light">
+						<img src="{$tpl_dir}/assets/images/themes/regentgrey_light.jpg" alt=""/>
+					</div>				
+				</li>
+				<li>
+					<div class="theme pull-left" id="regentgrey_light_sidebar">
+						<img src="{$tpl_dir}/assets/images/themes/regentgrey_light_sidebar.jpg" alt=""/>
+					</div>				
+				</li>
+			</ul>	
+		</div>
+	</div>
+
+--><a id="scrollTop" href="index1.htm#top"><i class="icon-arrow-up12"></i></a>	
+
+<!-- Global scripts -->
+<script src="{$tpl_dir}/js/jquery.js"></script>	
+<script src="{$tpl_dir}/js/bootstrap.js"></script>
+<script src="{$tpl_dir}/js/jquery.ui.js"></script>
+<script src="{$tpl_dir}/js/nav.accordion.js"></script>	
+<script src="{$tpl_dir}/js/hammerjs.js"></script>
+<script src="{$tpl_dir}/js/jquery.hammer.js"></script>
+<script src="{$tpl_dir}/js/scrollup.js"></script>	
+<script src="{$tpl_dir}/js/jquery.slimscroll.js"></script>	
+<script src="{$tpl_dir}/js/smart-resize.js"></script>
+<script src="{$tpl_dir}/js/blockui.min.js"></script>		
+<script src="{$tpl_dir}/js/wow.min.js"></script>					
+<script src="{$tpl_dir}/js/fancybox.min.js"></script>
+<script src="{$tpl_dir}/js/venobox.js"></script>
+<script src="{$tpl_dir}/js/forms/uniform.min.js"></script>
+<script src="{$tpl_dir}/js/forms/switchery.js"></script>
+<script src="{$tpl_dir}/js/forms/select2.min.js"></script>	
+<script src="{$tpl_dir}/js/core.js"></script>
+<!-- /global scripts -->	
+    <link rel="stylesheet" href="{$tpl_dir}/assets/dist/summernote.css">
+
+    <script type="text/javascript" src="{$tpl_dir}/assets/dist/summernote.js"></script>
+
+    <script type="text/javascript" src="{$tpl_dir}/assets/dist/summernote-ext-video.js"></script> 
+
+        
+
+    <script type="text/javascript" src="{$tpl_dir}/assets/js/jquery.cropit.js"></script>  
+
+    <script src="{$tpl_dir}/assets/bootstrap-fileinput/js/fileinput.js"></script>
+    <script type="text/javascript" src="{$tpl_dir}/assets/js/jquery.input.formatter.js"></script>  
+
+
+    <script type="text/javascript">        
+
+        $(function () {           
+
+            var isEdit = {if $isEdit eq true}true{else}false{/if};
+
+            $('.image-editor-avatar').cropit({
+              smallImage: 'stretch'{if $data[0].avatar neq ''},
+              imageState: {
+                src: '{$homeurl}/uploads/umum/{$data[0].avatar}',
+              }{/if}
+            });
+            
+            $('.image-editor-logo').cropit({
+              smallImage: 'stretch'{if $data[0].logo neq ''},
+              imageState: {
+                src: '{$homeurl}/uploads/umum/{$data[0].logo}',
+              }{/if}
+            });
+
+            $('.image-editor-bg').cropit({
+              smallImage: 'stretch'{if $data[0].bg neq ''},
+              imageState: {
+                src: '{$homeurl}/uploads/umum/{$data[0].bg}',
+              }{/if}
+            });
+
+            {assign var="no" value=1}
+
+            {foreach $listtelepon as $entry}
+
+                var record = 
+
+                    '<tr>' +
+
+                        '<td style="padding: 5px;" width="100%"><input type="text" value="{$entry.telepon}" name="telepon" class="form-control" placeholder="" /></td>' +
+
+                        '<td style="padding: 5px;"><div style="text-align: center;  white-space: nowrap;">{if $no gt 1}<div class="btn btn-danger hapus_telepon">Hapus</div>{/if}</div></td>' +
+
+                        '<td style="padding: 5px;"><div style="text-align: center;  white-space: nowrap;">{if $no eq 1}<div id="btn_tambah_telepon" class="btn btn-primary">Tambah</div>{/if}</div></td>' +
+
+                    '</tr>';
+
+
+
+                $( record ).insertBefore( "#telepon" );
+
+                {assign var="no" value=$no+1}
+
+            {/foreach}
+
+            
+
+            $( document ).on( 'click', '.hapus_telepon', function() {
+
+               
+
+                var element = $(this).closest('tr');
+
+                element.remove();
+
+                
+
+            });
+
+
+
+            $('#btn_tambah_telepon').click(function() {
+
+                var record = 
+
+                    '<tr>' +
+
+                        '<td style="padding: 5px;" width="100%"><input type="text" value="" name="telepon" class="form-control" placeholder="" /></td>' +
+
+                        '<td style="padding: 5px;"><div style="text-align: center;  white-space: nowrap;"><div class="btn btn-danger hapus_telepon">Hapus</div></div></td>' +
+
+                        '<td style="padding: 5px;"><div style="text-align: center;  white-space: nowrap;"></div></td>' +
+
+                    '</tr>';
+
+
+
+                $( record ).insertBefore( "#telepon" );
+
+            });
+
+            //-----------------
+
+            {assign var="no" value=1}
+
+            {foreach $listno_hp as $entry}
+
+                var record = 
+
+                    '<tr>' +
+
+                        '<td style="padding: 5px;" width="100%"><input type="text" value="{$entry.no_hp}" name="no_hp" class="form-control" placeholder="" /></td>' +
+
+                        '<td style="padding: 5px;"><div style="text-align: center;  white-space: nowrap;">{if $no gt 1}<div class="btn btn-danger hapus_no_hp">Hapus</div>{/if}</div></td>' +
+
+                        '<td style="padding: 5px;"><div style="text-align: center;  white-space: nowrap;">{if $no eq 1}<div id="btn_tambah_no_hp" class="btn btn-primary">Tambah</div>{/if}</div></td>' +
+
+                    '</tr>';
+
+
+
+                $( record ).insertBefore( "#no_hp" );
+
+                {assign var="no" value=$no+1}
+
+            {/foreach}
+
+            
+
+            $( document ).on( 'click', '.hapus_no_hp', function() {
+
+               
+
+                var element = $(this).closest('tr');
+
+                element.remove();
+
+                
+
+            });
+
+
+
+            $('#btn_tambah_no_hp').click(function() {
+
+                var record = 
+
+                    '<tr>' +
+
+                        '<td style="padding: 5px;" width="100%"><input type="text" value="" name="no_hp" class="form-control" placeholder="" /></td>' +
+
+                        '<td style="padding: 5px;"><div style="text-align: center;  white-space: nowrap;"><div class="btn btn-danger hapus_no_hp">Hapus</div></div></td>' +
+
+                        '<td style="padding: 5px;"><div style="text-align: center;  white-space: nowrap;"></div></td>' +
+
+                    '</tr>';
+
+
+
+                $( record ).insertBefore( "#no_hp" );
+
+            });
+
+            //---------------------
+
+            {assign var="no" value=1}
+
+            {foreach $listsms as $entry}
+
+                var record = 
+
+                    '<tr>' +
+
+                        '<td style="padding: 5px;" width="100%"><input type="text" value="{$entry.sms}" name="sms" class="form-control" placeholder="" /></td>' +
+
+                        '<td style="padding: 5px;"><div style="text-align: center;  white-space: nowrap;">{if $no gt 1}<div class="btn btn-danger hapus_sms">Hapus</div>{/if}</div></td>' +
+
+                        '<td style="padding: 5px;"><div style="text-align: center;  white-space: nowrap;">{if $no eq 1}<div id="btn_tambah_sms" class="btn btn-primary">Tambah</div>{/if}</div></td>' +
+
+                    '</tr>';
+
+
+
+                $( record ).insertBefore( "#sms" );
+
+                {assign var="no" value=$no+1}
+
+            {/foreach}
+
+            
+
+            $( document ).on( 'click', '.hapus_sms', function() {
+
+               
+
+                var element = $(this).closest('tr');
+
+                element.remove();
+
+                
+
+            });
+
+
+
+            $('#btn_tambah_sms').click(function() {
+
+                var record = 
+
+                    '<tr>' +
+
+                        '<td style="padding: 5px;" width="100%"><input type="text" value="" name="sms" class="form-control" placeholder="" /></td>' +
+
+                        '<td style="padding: 5px;"><div style="text-align: center;  white-space: nowrap;"><div class="btn btn-danger hapus_sms">Hapus</div></div></td>' +
+
+                        '<td style="padding: 5px;"><div style="text-align: center;  white-space: nowrap;"></div></td>' +
+
+                    '</tr>';
+
+
+
+                $( record ).insertBefore( "#sms" );
+
+            });
+
+            //------
+
+            
+
+            {assign var="no" value=1}
+
+            {foreach $listwa as $entry}
+
+                var record = 
+
+                    '<tr>' +
+
+                        '<td style="padding: 5px;" width="100%"><input type="text" value="{$entry.wa}" name="wa" class="form-control" placeholder="" /></td>' +
+
+                        '<td style="padding: 5px;"><div style="text-align: center;  white-space: nowrap;">{if $no gt 1}<div class="btn btn-danger hapus_wa">Hapus</div>{/if}</div></td>' +
+
+                        '<td style="padding: 5px;"><div style="text-align: center;  white-space: nowrap;">{if $no eq 1}<div id="btn_tambah_wa" class="btn btn-primary">Tambah</div>{/if}</div></td>' +
+
+                    '</tr>';
+
+
+
+                $( record ).insertBefore( "#wa" );
+
+                {assign var="no" value=$no+1}
+
+            {/foreach}
+
+            
+
+            $( document ).on( 'click', '.hapus_wa', function() {
+
+               
+
+                var element = $(this).closest('tr');
+
+                element.remove();
+
+                
+
+            });
+
+
+
+            $('#btn_tambah_wa').click(function() {
+
+                var record = 
+
+                    '<tr>' +
+
+                        '<td style="padding: 5px;" width="100%"><input type="text" value="" name="wa" class="form-control" placeholder="" /></td>' +
+
+                        '<td style="padding: 5px;"><div style="text-align: center;  white-space: nowrap;"><div class="btn btn-danger hapus_wa">Hapus</div></div></td>' +
+
+                        '<td style="padding: 5px;"><div style="text-align: center;  white-space: nowrap;"></div></td>' +
+
+                    '</tr>';
+
+
+
+                $( record ).insertBefore( "#wa" );
+
+            });
+
+            //-----------------
+
+            {assign var="no" value=1}
+
+            {foreach $listbbm as $entry}
+
+                var record = 
+
+                    '<tr>' +
+
+                        '<td style="padding: 5px;" width="100%"><input type="text" value="{$entry.bbm}" name="bbm" class="form-control" placeholder="" /></td>' +
+
+                        '<td style="padding: 5px;"><div style="text-align: center;  white-space: nowrap;">{if $no gt 1}<div class="btn btn-danger hapus_bbm">Hapus</div>{/if}</div></td>' +
+
+                        '<td style="padding: 5px;"><div style="text-align: center;  white-space: nowrap;">{if $no eq 1}<div id="btn_tambah_bbm" class="btn btn-primary">Tambah</div>{/if}</div></td>' +
+
+                    '</tr>';
+
+
+
+                $( record ).insertBefore( "#bbm" );
+
+                {assign var="no" value=$no+1}
+
+            {/foreach}
+
+            
+
+            $( document ).on( 'click', '.hapus_bbm', function() {
+
+               
+
+                var element = $(this).closest('tr');
+
+                element.remove();
+
+                
+
+            });
+
+
+
+            $('#btn_tambah_bbm').click(function() {
+
+                var record = 
+
+                    '<tr>' +
+
+                        '<td style="padding: 5px;" width="100%"><input type="text" value="" name="bbm" class="form-control" placeholder="" /></td>' +
+
+                        '<td style="padding: 5px;"><div style="text-align: center;  white-space: nowrap;"><div class="btn btn-danger hapus_bbm">Hapus</div></div></td>' +
+
+                        '<td style="padding: 5px;"><div style="text-align: center;  white-space: nowrap;"></div></td>' +
+
+                    '</tr>';
+
+
+
+                $( record ).insertBefore( "#bbm" );
+
+            });
+
+            //---------------------
+
+            {assign var="no" value=1}
+
+            {foreach $listline as $entry}
+
+                var record = 
+
+                    '<tr>' +
+
+                        '<td style="padding: 5px;" width="100%"><input type="text" value="{$entry.line}" name="line" class="form-control" placeholder="" /></td>' +
+
+                        '<td style="padding: 5px;"><div style="text-align: center;  white-space: nowrap;">{if $no gt 1}<div class="btn btn-danger hapus_line">Hapus</div>{/if}</div></td>' +
+
+                        '<td style="padding: 5px;"><div style="text-align: center;  white-space: nowrap;">{if $no eq 1}<div id="btn_tambah_line" class="btn btn-primary">Tambah</div>{/if}</div></td>' +
+
+                    '</tr>';
+
+
+
+                $( record ).insertBefore( "#line" );
+
+                {assign var="no" value=$no+1}
+
+            {/foreach}
+
+            
+
+            $( document ).on( 'click', '.hapus_line', function() {
+
+               
+
+                var element = $(this).closest('tr');
+
+                element.remove();
+
+                
+
+            });
+
+
+
+            $('#btn_tambah_line').click(function() {
+
+                var record = 
+
+                    '<tr>' +
+
+                        '<td style="padding: 5px;" width="100%"><input type="text" value="" name="line" class="form-control" placeholder="" /></td>' +
+
+                        '<td style="padding: 5px;"><div style="text-align: center;  white-space: nowrap;"><div class="btn btn-danger hapus_line">Hapus</div></div></td>' +
+
+                        '<td style="padding: 5px;"><div style="text-align: center;  white-space: nowrap;"></div></td>' +
+
+                    '</tr>';
+
+
+
+                $( record ).insertBefore( "#line" );
+
+            });
+
+            //-----------
+
+            
+
+            $('#propinsi').on('change', function (e) {
+
+                loadKota(this.value, 0);
+
+            });
+
+            
+
+            function loadKota(propinsi, kota) {
+
+                $("#kota").empty();
+
+                //$('<option value="0">-- Pilih Kota --</option>').appendTo('#kota');
+
+
+
+                $.ajax({
+
+                    type: 'POST',
+
+                    url: '{$homeurl}/store/getKota.php',
+
+                    data: { 'propinsi': propinsi },
+
+                    dataType: 'json',
+
+                    success: function(data) {
+
+                        var store = data['topics'];
+
+                        var data = ''; //'<option value="0">-- Pilih Kota --</option>';
+
+                        for(var key in store) {
+
+                            data+='<option value="'+store[key]['city_id']+'"'+(store[key]['city_id']==kota?' selected="selected"':'')+'>'+store[key]['city_name']+'</option>';
+
+                        }
+
+                        $("#kota").empty();
+
+                        $(data).appendTo('#kota');
+
+                    }
+
+                });    
+
+            }
+
+            
+
+            {if $data[0].propinsi gt 0}loadKota('{$data[0].propinsi}', '{$data[0].kota}');{/if}
+
+            $("input.harga").formatInput();    
+
+            $('.summernote').summernote({
+
+                height: 170,
+
+                toolbar: [
+
+                    ['style', ['style']],
+
+                    ['font', ['bold', 'italic', 'underline', 'clear']],
+
+                    //['fontname', ['fontname']],
+
+                    // ['fontsize', ['fontsize']], Still buggy
+
+                    ['color', ['color']],
+
+                    ['para', ['ul', 'ol', 'paragraph']],
+
+                    // ['height', ['height']],
+
+                    ['table', ['table']],
+
+                    ['insert', ['link', 'picture', 'video']],
+
+                    //['view', ['fullscreen' , 'codeview' ]],
+
+                    ['help', ['help']]
+
+                ]
+
+            });
+
+
+
+            $(".summernote").code('{if $isEdit eq true}{$data[0].detail}{/if}');
+
+            
+
+            $('.summernote_syaratkondisi').summernote({
+
+                height: 170,
+
+                toolbar: [
+
+                    ['style', ['style']],
+
+                    ['font', ['bold', 'italic', 'underline', 'clear']],
+
+                    //['fontname', ['fontname']],
+
+                    // ['fontsize', ['fontsize']], Still buggy
+
+                    ['color', ['color']],
+
+                    ['para', ['ul', 'ol', 'paragraph']],
+
+                    // ['height', ['height']],
+
+                    ['table', ['table']],
+
+                    ['insert', ['link', 'picture', 'video']],
+
+                    //['view', ['fullscreen' , 'codeview' ]],
+
+                    ['help', ['help']]
+
+                ]
+
+            });
+
+
+
+            $(".summernote_syaratkondisi").code('{if $isEdit eq true}{$data[0].syarat_kondisi}{/if}');
+
+            function setMessage(type, message) {
+
+                $('#alert_'+type+' .alert').text(message);
+
+                $('#alert_'+type).show('slow');
+
+                setTimeout(function() {
+
+                    $('#alert_'+type).hide('slow');
+
+                }, 5000);
+
+                $("body, html").animate({ 
+
+//                    scrollTop: $('#wrapper').offset().top 
+
+                }, 600);
+
+            }
+
+            
+
+            $('#btn_simpan_syaratkondisi').click(function() {            
+
+                var data = new FormData();
+
+                data.append('syarat_kondisi', $('.summernote_syaratkondisi').summernote().code().replace(/\n/, '<br />'));
+
+                
+
+                setLoading(true, 'syaratkondisi');
+
+                $.ajax({
+
+                    type: 'POST',
+
+                    url: 'updateSyaratkondisi.php',
+
+                    data: data,
+
+                    cache: false,
+
+                    dataType: 'json',
+
+                    processData: false, // Don't process the files
+
+                    contentType: false, // Set content type to false as jQuery will tell the server its a query string request
+
+                    success: function(data) {
+
+                        setLoading(false, 'syaratkondisi');
+
+                        if(data['success']) {
+
+                            setMessage('success', data['message']);  
+
+                        } else {
+
+                            setMessage('error', data['message']);                        
+
+                        }
+
+                    }, 
+
+                    error: function() {
+
+                        setLoading(false, 'syaratkondisi');
+
+                        setMessage('error', 'Kesalahan server. Mohon diulang kembali!');
+
+                    }
+
+                }); 
+
+            });
+
+            
+
+            $('#btn_simpan_pengaturan').click(function() {            
+
+                var data = new FormData();
+
+                data.append('jatuh_tempo', $('[name=jatuh_tempo]').val());
+
+                data.append('stok_minimum', $('[name=stok_minimum]').val());
+
+                data.append('is_tampilkan_stok', $('[name=tampilkan_stok]').is(':checked')?'Y':'N');     
+
+                data.append('status_stok', $('[name=status_stok]').val());
+
+                data.append('parameter_status', $('[name=parameter_status]').val());
+
+                data.append('jam', $('[name=jam]').val());
+
+                data.append('menit', $('[name=menit]').val());
+                
+                setLoading(true, 'pengaturan');
+
+                $.ajax({
+
+                    type: 'POST',
+
+                    url: 'updatePengaturan.php',
+
+                    data: data,
+
+                    cache: false,
+
+                    dataType: 'json',
+
+                    processData: false, // Don't process the files
+
+                    contentType: false, // Set content type to false as jQuery will tell the server its a query string request
+
+                    success: function(data) {
+
+                        setLoading(false, 'pengaturan');
+
+                        if(data['success']) {
+
+                            setMessage('success', data['message']);  
+
+                        } else {
+
+                            setMessage('error', data['message']);                        
+
+                        }
+
+                    }, 
+
+                    error: function() {
+
+                        setLoading(false, 'pengaturan');
+
+                        setMessage('error', 'Kesalahan server. Mohon diulang kembali!');
+
+                    }
+
+                }); 
+            });
+            
+            
+            $('#btn_simpan_pelanggan').click(function() {            
+
+                var data = new FormData();
+
+                data.append('aktivasi_sms', $('[name=aktivasi_sms]').val());
+
+                data.append('aktivasi_admin', $('[name=aktivasi_admin]').val());
+
+                setLoading(true, 'pelanggan');
+
+                $.ajax({
+
+                    type: 'POST',
+
+                    url: 'updatePelanggan.php',
+
+                    data: data,
+
+                    cache: false,
+
+                    dataType: 'json',
+
+                    processData: false, // Don't process the files
+
+                    contentType: false, // Set content type to false as jQuery will tell the server its a query string request
+
+                    success: function(data) {
+
+                        setLoading(false, 'pelanggan');
+
+                        if(data['success']) {
+
+                            setMessage('success', data['message']);  
+
+                        } else {
+
+                            setMessage('error', data['message']);                        
+
+                        }
+
+                    }, 
+
+                    error: function() {
+
+                        setLoading(false, 'pelanggan');
+
+                        setMessage('error', 'Kesalahan server. Mohon diulang kembali!');
+
+                    }
+
+                }); 
+            });
+                       
+            $('#btn_add_tujuan').click(function() {
+                var record = 
+                    '<tr>' +                        
+                        '<td align="center"><span class="fa fa-trash-o hapus_tujuan" style="cursor: pointer;"></span></td>' +  
+                        '<td align="left">' +
+                            '<select name="propinsi" class="form-control nama_propinsi">' +
+                                '<option value="{$entry.province_id}" {if $entry.province_id eq $data[0].propinsi} selected="selected" {/if}></option>' +
+                                {foreach $listpropinsi as $entry}
+                                    '<option value="{$entry.province_id}">{$entry.province}</option>' +
+                                {/foreach}
+                            '</select>' +
+                        '</td>' +
+                        '<td align="left">' +
+                            '<select name="kota" class="form-control"></select>' +
+                        '</td>' +
+                    '</tr>';
+                 $( record ).insertBefore( "#detail_tujuan" );
+                 setNamaPropinsiChange();
+            });
+
+
+            $( document ).on( 'click', '.hapus_tujuan', function() {
+                var element = $(this).closest('tr');
+                element.remove();
+            });
+                
+
+            function setNamaPropinsiChange() {
+
+                $('.nama_propinsi').on('change', function (e) {
+                    
+                    var element = $(this).closest('tr');
+                    var kolom_kota = element.find('[name=kota]');
+
+                    loadKotaTujuan(this.value, kolom_kota);
+
+                });
+            }
+
+            
+
+            function loadKotaTujuan(propinsi, kolom_kota) {
+
+                kolom_kota.empty();
+
+                $.ajax({
+
+                    type: 'POST',
+
+                    url: '{$homeurl}/store/getKota.php',
+
+                    data: { 'propinsi': propinsi },
+
+                    dataType: 'json',
+
+                    success: function(data) {
+
+                        var store = data['topics'];
+
+                        kolom_kota.empty();
+                        for(var key in store) {
+                            kolom_kota.append($('<option>', {
+                                value: store[key]['city_id'],
+                                text: store[key]['city_name']
+                            }));
+                        }                        
+                    }
+                });
+            }
+
+
+            
+
+            $('#btn_simpan_freeongkir').click(function() {            
+
+                var data = new FormData();
+
+                data.append('is_aktif', $('[name=is_aktif_freeongkir]').val());
+
+                data.append('all_produk', $('[name=all_produk_freeongkir]').val());
+
+                data.append('min_pembelian', ($('[name=min_pembelian_freeongkir]').val()).replace(/\,/g, ''));     
+
+                var kurir = $('[name=kurir_freeongkir]').val();
+                $id_kurir = '';
+                for(var key in kurir) {
+                    $id_kurir+=(key>0?',':'')+kurir[key]
+                }
+                data.append('id_kurir', $id_kurir);
+
+                var row = 0;
+                var detail = '';
+                $("#tblDetail_tujuan tr").each(function() {
+                    if(row>0) {
+                        var id_propinsi = $(this).find('[name=propinsi]').val();
+                        var propinsi    = $(this).find('[name=propinsi] option:selected').text();
+                        var id_kota     = $(this).find('[name=kota]').val();
+                        var kota        = $(this).find('[name=kota] option:selected').text();
+                
+                        detail+=(detail==''?'':'\n')+id_propinsi+'\t'+propinsi+'\t'+id_kota+'\t'+kota;                                                 
+                    }
+                    row++;
+                });  
+                data.append('detail_tujuan', detail);
+                console.log(detail);
+                
+                setLoading(true, 'freeongkir');
+
+                $.ajax({
+
+                    type: 'POST',
+
+                    url: 'updateFreeongkir.php',
+
+                    data: data,
+
+                    cache: false,
+
+                    dataType: 'json',
+
+                    processData: false, // Don't process the files
+
+                    contentType: false, // Set content type to false as jQuery will tell the server its a query string request
+
+                    success: function(data) {
+
+                        setLoading(false, 'freeongkir');
+
+                        if(data['success']) {
+
+                            setMessage('success', data['message']);  
+
+                        } else {
+
+                            setMessage('error', data['message']);                        
+
+                        }
+
+                    }, 
+
+                    error: function() {
+
+                        setLoading(false, 'freeongkir');
+
+                        setMessage('error', 'Kesalahan server. Mohon diulang kembali!');
+
+                    }
+
+                }); 
+
+            });
+
+            $('#btn_simpan_alamat').click(function() {            
+
+                var data = new FormData();
+
+                data.append('address', $('[name=alamat]').val());
+
+                data.append('propinsi', $('[name=propinsi]').val());
+
+                data.append('nama_propinsi', $("#propinsi option[value='"+$('[name=propinsi]').val()+"']").text());
+
+                data.append('kota', $('[name=kota]').val());
+
+                data.append('nama_kota', $("#kota option[value='"+$('[name=kota]').val()+"']").text());
+
+                data.append('kode_pos', $('[name=kode_pos]').val());                
+
+                data.append('latitude', $('[name=latitude]').val());                
+
+                data.append('longitude', $('[name=longitude]').val());
+
+                
+
+                setLoading(true, 'alamat');
+
+                $.ajax({
+
+                    type: 'POST',
+
+                    url: 'updateAlamat.php',
+
+                    data: data,
+
+                    cache: false,
+
+                    dataType: 'json',
+
+                    processData: false, // Don't process the files
+
+                    contentType: false, // Set content type to false as jQuery will tell the server its a query string request
+
+                    success: function(data) {
+
+                        setLoading(false, 'alamat');
+
+                        if(data['success']) {
+
+                            setMessage('success', data['message']);  
+
+                        } else {
+
+                            setMessage('error', data['message']);                        
+
+                        }
+
+                    }, 
+
+                    error: function() {
+
+                        setLoading(false, 'alamat');
+
+                        setMessage('error', 'Kesalahan server. Mohon diulang kembali!');
+
+                    }
+
+                }); 
+
+            });
+
+
+
+            $('#btn_simpan_umum').click(function() {            
+
+                
+
+                var telepon = '';
+
+                $("#tblTelepon tr").each(function() {
+
+                    var data = $(this).find('[name=telepon]').val();
+
+                    telepon+=(telepon==''?'':'\t')+data;
+
+                });
+
+                
+
+                var no_hp = '';
+
+                $("#tblNo_hp tr").each(function() {
+
+                    var data = $(this).find('[name=no_hp]').val();
+
+                    no_hp+=(no_hp==''?'':'\t')+data;
+
+                });
+
+                
+
+                var sms = '';
+
+                $("#tblSms tr").each(function() {
+
+                    var data = $(this).find('[name=sms]').val();
+
+                    sms+=(sms==''?'':'\t')+data;
+
+                });
+
+                
+
+                var wa = '';
+
+                $("#tblWa tr").each(function() {
+
+                    var data = $(this).find('[name=wa]').val();
+
+                    wa+=(wa==''?'':'\t')+data;
+
+                });
+
+                
+
+                var bbm = '';
+
+                $("#tblBbm tr").each(function() {
+
+                    var data = $(this).find('[name=bbm]').val();
+
+                    bbm+=(bbm==''?'':'\t')+data;
+
+                });
+
+                
+
+                var line = '';
+
+                $("#tblLine tr").each(function() {
+
+                    var data = $(this).find('[name=line]').val();
+
+                    line+=(line==''?'':'\t')+data;
+
+                });
+
+        
+
+                var data = new FormData();
+
+                data.append('judul', $('[name=judul]').val());
+
+                data.append('tagline', $('[name=tagline]').val());
+
+                data.append('detail', $('.summernote').summernote().code().replace(/\n/, '<br />'));
+
+                var imageDataAvatar = $('.image-editor-avatar').cropit('export');
+
+                data.append('filename_avatar', imageDataAvatar==undefined?'':imageDataAvatar);
+
+                var imageDataLogo = $('.image-editor-logo').cropit('export');
+
+                data.append('filename_logo', imageDataLogo==undefined?'':imageDataLogo);
+
+                var imageDataBg = $('.image-editor-bg').cropit('export');
+
+                data.append('filename_bg', imageDataBg==undefined?'':imageDataBg);
+
+                data.append('landing_page', $('[name=landing_page]').val());
+
+                data.append('tampilkan_shortcut', $('[name=tampilkan_shortcut]').val());
+
+                data.append('tampilkan_kategori', $('[name=tampilkan_kategori]').val());
+
+                data.append('tampilkan_induk_kategori', $('[name=tampilkan_induk_kategori]').val());
+
+                data.append('email', $('[name=email]').val());                
+
+                data.append('telepon', telepon);                
+
+                data.append('no_hp', no_hp);
+
+                data.append('sms', sms);                
+
+                data.append('wa', wa);
+
+                data.append('bbm', bbm);                
+
+                data.append('line', line);
+
+
+
+                setLoading(true, 'umum');
+
+                $.ajax({
+
+                    type: 'POST',
+
+                    url: 'updateUmum.php',
+
+                    data: data,
+
+                    cache: false,
+
+                    dataType: 'json',
+
+                    processData: false, // Don't process the files
+
+                    contentType: false, // Set content type to false as jQuery will tell the server its a query string request
+
+                    success: function(data) {
+
+                        setLoading(false, 'umum');
+
+                        if(data['success']) {
+
+                            setMessage('success', data['message']);  
+
+                        } else {
+
+                            setMessage('error', data['message']);                        
+
+                        }
+
+                    }, 
+
+                    error: function() {
+
+                        setLoading(false, 'umum');
+
+                        setMessage('error', 'Kesalahan server. Mohon diulang kembali!');
+
+                    }
+
+                }); 
+
+            });
+
+            
+
+            function setLoading(isLoading, tab) {
+
+                if(isLoading) {
+
+                    $('#i_loading_'+tab).show();
+
+                    $('#btn_simpan_'+tab).hide();
+
+                } else {
+
+                    $('#i_loading_'+tab).hide();
+
+                    $('#btn_simpan_'+tab).show();                    
+
+                }
+
+            }
+
+            $('#upload_avatar').click(function(){
+
+                $('#fileupload_avatar').trigger('click'); 
+
+                return false;
+
+            });
+
+
+
+            $('#upload_logo').click(function(){
+
+                $('#fileupload_logo').trigger('click'); 
+
+                return false;
+
+            });
+
+
+            $('#upload_bg').click(function() {
+
+                $('#fileupload_bg').trigger('click'); 
+
+                return false;
+
+            });
+            
+
+            {if $alert_success neq ""}setMessage('success', '{$alert_success}');{/if}        
+
+            {if $alert_error neq ""}setMessage('error', '{$alert_error}');{/if} 
+
+        });
+
+    </script>
+</body>{include file="$include_tpl/includes/footer_js.html"}
+</html>

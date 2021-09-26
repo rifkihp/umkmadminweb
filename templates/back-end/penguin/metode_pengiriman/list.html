@@ -1,0 +1,533 @@
+{include file="$include_tpl/includes/head.html"}
+<!--sidebar-->
+{include file="$include_tpl/includes/sidebar.html"}
+<!--/sidebar-->
+<!--Page Container-->
+<section class="main-container">	
+    <!--Page Header-->
+    <div class="header">
+        <div class="header-content">
+            <div class="page-title">
+                <i class="icon-table position-left"></i> {$title}
+            </div>
+            <ul class="breadcrumb">
+                <li><a href="{$adminweburl}">Beranda</a></li>
+                <li><a href="{$adminweburl}/metode_pengiriman/">{$title}</a></li>
+                <li class="active">{$sub_title}</li>
+            </ul>					
+        </div>
+    </div>		
+    <!--/Page Header-->
+
+    <!--Page Content-->
+    <div id="wrapper" class="container-fluid page-content">				
+        <div class="panel panel-flat" style="margin: 5px;">
+            <div class="form-group panel-body no-padding-bottom">
+
+                <div class="form-group">
+                    <ul id="myTab" class="nav nav-tabs">                                
+                        <li{if $tab eq "dataekspedisi"} class="active"{/if}>
+                            <a href="#dataekspedisi" data-toggle="tab"><b>DATA EKSPEDISI</b></a>
+                        </li>                                 
+                        <li{if $tab eq "freeongkir"} class="active"{/if}>
+                            <a href="#freeongkir" data-toggle="tab"><b>FREE ONGKIR</b></a>
+                        </li>                                
+                        <li{if $tab eq "cod"} class="active"{/if}>
+                            <a href="#cod" data-toggle="tab"><b>COD</b></a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div id="alert_success" class="form-group" style="display: none;">                         
+                    <div class="alert alert-info">&nbsp;</div>
+                </div>
+                    
+                <div id="alert_error" class="form-group" style="display: none;">                         
+                    <div class="alert alert-danger">&nbsp;</div>
+                </div>
+
+                <div class="form-group tab-content">
+                    <div class="tab-pane fade{if $tab eq "dataekspedisi"} active in{/if}" id="dataekspedisi">
+                         
+                         <div class="panel-body no-padding-bottom">
+                            <div class="input-group">
+                                <input type="text" value="{$query}" class="form-control" name="query" id="query" placeholder="Masukan kata kunci pencarian..." />
+                                <span class="input-group-btn"><div id="btn_cari" type="submit" class="btn btn-default">Cari</div>
+                                <a class="btn btn-default" href="list.php?tab=dataekspedisi">Reset</a></span>                                                  
+                            </div>
+
+                            <div class="form-group"></div>
+
+                            <div class="form-group">
+                                {if 'T'|in_array:$array_akses}<div id='btn_add' class="btn btn-primary">Baru</div>{/if}
+                                {if 'E'|in_array:$array_akses}<div id='btn_edit' class="btn btn-success disabled">Edit</div>{/if}
+                                {if 'H'|in_array:$array_akses}<div id='btn_delete' class="btn btn-danger disabled">Hapus</div>{/if}
+                            </div>
+                        </div>
+			
+                        <div class="form-group"></div>
+                        
+                        <div class="table-responsive">
+                            <table class="table datatable table-striped">
+                                <thead>
+                                    <tr>
+                                        <th width="5px"><input type="checkbox" id="select_all" /></th>
+                                        <th width="5%"><div style="text-align: center;">No.</div></th>
+                                        <th width="25%"><div style="text-align: center;">Kode</div></th>
+                                        <th width="35%"><div style="text-align: center;">Nama</div></th>
+                                        <th width="15%"><div style="text-align: center;">Status</div></th>
+                                        <th width="10%"><div style="text-align: center;">Logo</div></th>
+                                        <th width="10%"><div style="text-align: center;">Aksi</div></th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    {assign var="no" value=1}
+                                    {foreach $listdetail as $entry}                                    
+                                        <tr id="baris_{$entry.id}">
+                                            <td align="center"><input type="checkbox" id_select="{$entry.id}" name="select_{$entry.id}" class="select" /></td>
+                                            <td align="center">{$limitpage*($currentpage-1)+$no}</td>
+                                            <td align="center">{$entry.kode}</td>
+                                            <td align="center">{$entry.nama}</td>
+                                            <td align="center"><span style="font-weight: bold; color: {if $entry.is_aktif eq "Y"}green{else}red{/if};">{if $entry.is_aktif eq "Y"}Aktif{else}Tidak Aktif{/if}</span></td>
+                                            <td align="center"><div style="text-align: center;  white-space: nowrap;">
+                                                {if $entry.gambar neq ''}<img src="{$homeurl}/uploads/ekspedisi/{$entry.gambar}" width="75px" />{/if}
+                                            </div></td>
+                                            <td>
+                                                <div style="text-align: center;  white-space: nowrap;">
+                                                    {if 'E'|in_array:$array_akses}<div id_select="{$entry.id}" class="btn btn-success edit">Edit</div>{/if}
+                                                    {if 'H'|in_array:$array_akses}<div id_select="{$entry.id}" class="btn btn-danger hapus">Hapus</div>{/if}                                                         
+                                                </div>
+                                            </td>                                          
+                                        </tr>
+                                        {assign var="no" value=$no+1}  
+                                    {/foreach}
+                                </tbody>
+
+                                {if $totalpage gt 1}
+                                    <tfoot>
+                                        <tr>
+                                            <th colspan="7">
+                                                <div style="text-align: center;">
+                                                    {if $currentpage gt 1}                                
+                                                        <a class="btn btn-default" href="list.php?tab=dataekspedisi&page={$currentpage-1}{if $query neq ''}&query={$query}{/if}">&larr; Prev</a>
+                                                    {/if}
+                                                    {assign var="item" value=$frompage}
+                                                    {for $foo=$frompage to $untilpage}
+                                                        {if $item eq $currentpage}
+                                                            <span class="btn btn-info">{$item}</span>                                
+                                                        {else}
+                                                            <a class="btn btn-default" href="list.php?tab=dataekspedisi&page={$item}{if $query neq ''}&query={$query}{/if}">{$item}</a>
+                                                        {/if}
+                                                        {assign var="item" value=$item+1}                                
+                                                    {/for}
+
+                                                    {if $totalpage gt $currentpage}                                
+                                                        <a class="btn btn-default" href="list.php?tab=dataekspedisi&page={$currentpage+1}{if $query neq ''}&query={$query}{/if}">Next &rarr;</a>
+                                                    {/if}                                
+                                                </div>  
+                                            </th>
+                                        </tr>
+                                    </tfoot>
+                                {/if}
+                            </table>
+                        </div>                        
+                    </div>
+                    
+                    <div class="tab-pane fade{if $tab eq "freeongkir"} active in{/if}" id="freeongkir">
+
+                        <div class="form-group">
+                            <label for="is_aktif_freeongkir">Aktifkan Free Ongkir:</label>
+                            <table>
+                                <tr>
+                                    <td>
+                                        <label><input type="radio" name="is_aktif_freeongkir" value="1" {if $data[0].is_aktif_freeongkir eq '1'}checked{/if} />&nbsp;&nbsp;<span class="label bg-blue" style="font-size: 9pt;">AKTIF</span>&nbsp;&nbsp;</label>
+                                        <label><input type="radio" name="is_aktif_freeongkir" value="0" {if $data[0].is_aktif_freeongkir eq '0'}checked{/if} />&nbsp;&nbsp;<span class="label bg-blue" style="font-size: 9pt;">TIDAK AKTIF</span>&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="all_produk_freeongkir">Free Ongkir Untuk Semua Produk:</label>
+                            <table>
+                                <tr>
+                                    <td>
+                                        <label><input type="radio" name="all_produk_freeongkir" value="1" {if $data[0].all_produk_freeongkir eq '1'}checked{/if} />&nbsp;&nbsp;<span class="label bg-blue" style="font-size: 9pt;">AKTIF</span>&nbsp;&nbsp;</label>
+                                        <label><input type="radio" name="all_produk_freeongkir" value="0" {if $data[0].all_produk_freeongkir eq '0'}checked{/if} />&nbsp;&nbsp;<span class="label bg-blue" style="font-size: 9pt;">TIDAK AKTIF</span>&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="min_pembelian_freeongkir">Jumlah Minimum Pembelian (Rp.):</label>
+                            <input type="text" value="{$data[0].min_pembelian_freeongkir}" class="form-control harga" name="min_pembelian_freeongkir" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="kurir_freeongkir">Jenis Kurir Free Ongkir:</label>
+                            <select multiple class="form-control" name="kurir_freeongkir" style="height: 200px;">
+                                {foreach $datakurir as $entry}
+                                    <option value="{$entry.id}" {if $entry.is_select eq 'Y'} selected="selected" {/if}>{$entry.kode}</option>                                        
+                                {/foreach}                            
+                            </select>
+                            <label>Gunakan tombol Ctrl untuk pilih lebih dari 1 kurir.</label>
+                        </div>
+                         
+                        <div id="list_tujuan" class="table-responsive" style="margin-top: 10px;">
+                            <div class="form-group">
+                                <label for="detail_tujuan">Tujuan Free Ongkir:</label>
+                                <table  id="tblDetail_tujuan" class="table table-striped table-bordered table-hover" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th width="5px"><span class="fa fa-trash-o"></span></th>
+                                            <th width="50%"><div style="text-align: left;">Propinsi</div></th>
+                                            <th width="50%"><div style="text-align: left;">Kota</div></th> 
+                                        </tr>
+                                    </thead>
+                                    <tbody id="detail_tujuan">
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="form-group">
+                                <div id='btn_add_tujuan' class="btn btn-primary">Tambah</div>                       
+                            </div>      
+                        </div>
+                        
+                        <div class="form-group"></div>
+                                      
+                        <div class="form-group">
+                            <div id="i_loading_freeongkir" class="G-btn-animation" style="display: none;"><img src="{$tpl_dir}/assets/img/loading.gif" /></div>                  
+                            {if 'E'|in_array:$array_akses}<div id="btn_simpan_freeongkir" class="btn btn-primary">Update</div>{/if}
+                        </div>    
+                    </div>
+                    
+                    <div class="tab-pane fade{if $tab eq "cod"} active in{/if}" id="cod">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--/Page Content-->
+
+    <!--Footer -->
+    {include file="$include_tpl/includes/footer.html"}
+    <!--/Footer-->
+
+</section>
+<!--/Page Container-->
+
+<!-- Global scripts -->
+<script src="{$tpl_dir}/js/jquery.js"></script>	
+<script src="{$tpl_dir}/js/bootstrap.js"></script>
+<script src="{$tpl_dir}/js/jquery.ui.js"></script>
+<script src="{$tpl_dir}/js/nav.accordion.js"></script>	
+<script src="{$tpl_dir}/js/hammerjs.js"></script>
+<script src="{$tpl_dir}/js/jquery.hammer.js"></script>
+<script src="{$tpl_dir}/js/scrollup.js"></script>	
+<script src="{$tpl_dir}/js/jquery.slimscroll.js"></script>	
+<script src="{$tpl_dir}/js/smart-resize.js"></script>
+<script src="{$tpl_dir}/js/blockui.min.js"></script>		
+<script src="{$tpl_dir}/js/wow.min.js"></script>					
+<script src="{$tpl_dir}/js/fancybox.min.js"></script>
+<script src="{$tpl_dir}/js/venobox.js"></script>
+<script src="{$tpl_dir}/js/forms/uniform.min.js"></script>
+<script src="{$tpl_dir}/js/forms/switchery.js"></script>
+<script src="{$tpl_dir}/js/forms/select2.min.js"></script>	
+<script src="{$tpl_dir}/js/core.js"></script>
+<!-- /global scripts -->	
+    
+<script type="text/javascript" src="{$tpl_dir}/assets/js/jquery.cropit.js"></script> 
+<!-- iCheck -->
+<link rel="stylesheet" href="{$tpl_dir}/js/iCheck/square/blue.css">
+<script src="{$tpl_dir}/js/iCheck/icheck.min.js"></script>  
+
+<script type="text/javascript">        
+
+    $(function () {           
+        $('input').iCheck({
+            checkboxClass: 'icheckbox_square-blue',
+            radioClass: 'iradio_square-blue',
+            increaseArea: '20%' // optional
+        });
+        
+        var setLoading = function(isLoading, tab) {
+            if(isLoading) {
+                $('#i_loading_'+tab).show();
+                $('#btn_simpan_'+tab).hide();
+            } else {
+                $('#i_loading_'+tab).hide();
+                $('#btn_simpan_'+tab).show();                    
+            }
+        };
+        
+        var setMessage = function(type, message) {
+            $('#alert_'+type+' .alert').text(message);
+            $('#alert_'+type).show('slow');
+            setTimeout(function() {
+                $('#alert_'+type).hide('slow');
+            }, 5000);
+            $("body, html").animate({ 
+                scrollTop: $('#wrapper').offset().top 
+            }, 600);
+        };
+        
+        var setButton = function() {
+            var temp = new Array();
+            if(delete_selected.length>0) temp = delete_selected.split(',');                
+            $( "#btn_edit" ).removeClass('disabled').addClass(temp.length==1?'':'disabled');
+            $( "#btn_delete" ).removeClass('disabled').addClass(temp.length>0?'':'disabled');
+        };
+
+        var prosesDelete = function(id) {
+            swal({
+                title: 'Menghapus Data',
+                text: 'Apakah Anda Yakin Akan Menghapus Record Data Ini?',
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, Hapus Sekarang!',
+                cancelButtonText: 'Batal',
+                confirmButtonClass: 'btn btn-success',
+                cancelButtonClass: 'btn btn-danger',
+                buttonsStyling: false
+            }).then(function () {
+                $.ajax({
+                    url: 'delete.php',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: { id: id },
+                    success: function(data, textStatus, jqXHR) {
+                        
+                        if(data['success']) {
+                            window.location='list.php?tab=dataekspedisi{if $query neq ""}&query={$query}{/if}';
+                        } else {
+                            setMessage('error', data['message']);
+                        }
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        setMessage('error', 'Terjadi kesalahan system.');
+                    }
+                }); 
+            }, function (dismiss) {
+                // dismiss can be 'cancel', 'overlay', 'close', 'timer'
+                //if (dismiss === 'cancel') {
+                    //swal('Cancelled', 'Record Data Batal Dihapus', 'error');
+                //}
+            });
+        };
+
+        var delete_selected = "";
+
+        $( "#btn_add" ).click(function() {
+            window.location='add.php';
+        });
+
+        $( "#btn_edit" ).click(function() {
+            window.location='edit.php?id='+delete_selected;
+        });
+
+        $( "#btn_delete" ).click(function() {
+            prosesDelete(delete_selected);
+        });
+
+        $( "#btn_cari" ).click(function() {
+            var query = $( "#query" ).val();
+            window.location='list.php?tab=dataekspedisi'+(query.length>0?'&query='+query:'');
+        });
+
+        $( ".hapus" ).click(function() {                
+            var id = this.getAttribute('id_select');
+            prosesDelete(id);                
+        });
+
+        $( ".edit" ).click(function() {
+            var id = this.getAttribute('id_select');
+            window.location='edit.php?id='+id;
+        });
+
+        $( "#select_all" ).change(function() {
+            var is_checked = $( "#select_all" ).is(':checked');
+            var element = $( ".select" );
+            var lengh = element.size();
+            delete_selected = '';
+            for(var i=0; i<lengh; i++) {
+                var id = element[i].getAttribute('id_select');
+                var nama = element[i].getAttribute('name');
+                $('[name='+nama+']').prop('checked', is_checked);                    
+                if(is_checked) delete_selected+=(delete_selected==''?'':',')+(is_checked?id:"");
+            }
+            setButton();
+        });
+
+        $( ".select" ).change(function() {
+            var id = this.getAttribute('id_select');
+            var nama = this.getAttribute('name');
+            var is_checked = $( '[name='+nama+']').is(':checked');
+            var temps = delete_selected.split(',');
+            delete_selected='';
+            for(var key in temps) {
+                if(temps[key]!=id) delete_selected+=(delete_selected.length>0?",":"")+temps[key];
+            }
+            delete_selected+=(delete_selected.length>0?",":"")+(is_checked?id:""); 
+            setButton();
+        });
+        
+        
+        
+        
+                
+
+        var setNamaPropinsiChange = function() {
+
+            $('.nama_propinsi').on('change', function (e) {
+
+                var element = $(this).closest('tr');
+                var kolom_kota = element.find('[name=kota]');
+
+                loadKotaTujuan(this.value, kolom_kota);
+
+            });
+        };
+
+        var loadKotaTujuan = function(propinsi, kolom_kota) {
+            kolom_kota.empty();
+            $.ajax({
+                type: 'POST',
+                url: '{$homeurl}/store/getKota.php',
+                data: { 'propinsi': propinsi },
+                dataType: 'json',
+                success: function(data) {
+                    var store = data['topics'];
+                    kolom_kota.empty();
+                    for(var key in store) {
+                        kolom_kota.append($('<option>', {
+                            value: store[key]['city_id'],
+                            text: store[key]['city_name']
+                        }));
+                    }                        
+                }
+            });
+        };
+
+
+        {foreach $freeongkir_tujuan as $entries}
+            var record = 
+                '<tr>' +                        
+                    '<td align="center"><span class="fa fa-trash-o hapus_tujuan" style="cursor: pointer;"></span></td>' +  
+                    '<td align="left">' +
+                        '<select name="propinsi" class="form-control nama_propinsi">' +
+                            {foreach $listpropinsi as $entry}
+                                '<option value="{$entry.province_id}" {if $entry.province_id eq $entries.id_propinsi} selected="selected" {/if}>{$entry.province}</option>' +
+                            {/foreach}
+                        '</select>' +
+                    '</td>' +
+                    '<td align="left">' +
+                        '<select name="kota" class="form-control">' +
+                            '<option value="{$entries.id_kota}" selected="selected">{$entries.kota}</option>' +
+                        '</select>' +
+                    '</td>' +
+                '</tr>';
+             $( record ).insertBefore( "#detail_tujuan" );
+        {/foreach}
+            
+         setNamaPropinsiChange();
+
+        $('#btn_add_tujuan').click(function() {
+            var record = 
+                '<tr>' +                        
+                    '<td align="center"><span class="fa fa-trash-o hapus_tujuan" style="cursor: pointer;"></span></td>' +  
+                    '<td align="left">' +
+                        '<select name="propinsi" class="form-control nama_propinsi">' +
+                            '<option value=""></option>' +
+                            {foreach $listpropinsi as $entry}
+                                '<option value="{$entry.province_id}">{$entry.province}</option>' +
+                            {/foreach}
+                        '</select>' +
+                    '</td>' +
+                    '<td align="left">' +
+                        '<select name="kota" class="form-control"></select>' +
+                    '</td>' +
+                '</tr>';
+             $( record ).insertBefore( "#detail_tujuan" );
+             setNamaPropinsiChange();
+        });
+
+
+        $( document ).on( 'click', '.hapus_tujuan', function() {
+            var element = $(this).closest('tr');
+            element.remove();
+        });
+
+        var is_aktif_freeongkir = "{if $data[0].is_aktif_freeongkir eq ''}0{else}{$data[0].is_aktif_freeongkir}{/if}";        
+        $('input[name=is_aktif_freeongkir]').on('ifChecked', function(event){
+            is_aktif_freeongkir = $(this).val();
+        });
+
+        var all_produk_freeongkir = "{if $data[0].all_produk_freeongkir eq ''}0{else}{$data[0].all_produk_freeongkir}{/if}";        
+        $('input[name=all_produk_freeongkir]').on('ifChecked', function(event){
+            all_produk_freeongkir = $(this).val();
+        });
+
+        $('#btn_simpan_freeongkir').click(function() {            
+            var data = new FormData();
+            data.append('is_aktif', is_aktif_freeongkir);
+            data.append('all_produk', all_produk_freeongkir);
+            data.append('min_pembelian', ($('[name=min_pembelian_freeongkir]').val()).replace(/\,/g, ''));     
+            var kurir = $('[name=kurir_freeongkir]').val();
+            $id_kurir = '';
+            for(var key in kurir) {
+                $id_kurir+=(key>0?',':'')+kurir[key]
+            }
+            data.append('id_kurir', $id_kurir);
+
+            var row = 0;
+            var detail = '';
+            $("#tblDetail_tujuan tr").each(function() {
+                if(row>0) {
+                    var id_propinsi = $(this).find('[name=propinsi]').val();
+                    var propinsi    = $(this).find('[name=propinsi] option:selected').text();
+                    var id_kota     = $(this).find('[name=kota]').val();
+                    var kota        = $(this).find('[name=kota] option:selected').text();
+
+                    detail+=(detail==''?'':'\n')+id_propinsi+'\t'+propinsi+'\t'+id_kota+'\t'+kota+'\t';                                                 
+                }
+                row++;
+            });  
+            data.append('detail_tujuan', detail);
+            //console.log(detail);
+
+            setLoading(true, 'freeongkir');
+            $.ajax({
+                type: 'POST',
+                url: 'updateFreeongkir.php',
+                data: data,
+                cache: false,
+                dataType: 'json',
+                processData: false, // Don't process the files
+                contentType: false, // Set content type to false as jQuery will tell the server its a query string request
+                success: function(data) {
+                    setLoading(false, 'freeongkir');
+                    if(data['success']) {
+                        setMessage('success', data['message']);  
+                    } else {
+                        setMessage('error', data['message']);                        
+                    }
+                }, 
+
+                error: function() {
+                    setLoading(false, 'freeongkir');
+                    setMessage('error', 'Kesalahan server. Mohon diulang kembali!');
+                }
+            }); 
+        });
+
+        {if $alert_success neq ""}setMessage('success', '{$alert_success}');{/if}
+        {if $alert_error neq ""}setMessage('error', '{$alert_error}');{/if} 
+    });
+</script>
+</body>{include file="$include_tpl/includes/footer_js.html"}
+</html>

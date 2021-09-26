@@ -1,0 +1,640 @@
+{include file="$include_tpl/includes/head.html"}
+<!--sidebar-->
+{include file="$include_tpl/includes/sidebar.html"}
+<!--/sidebar-->
+<!--Page Container-->
+<section class="main-container">	
+    <!--Page Header-->
+    <div class="header">
+        <div class="header-content">
+            <div class="page-title">
+                <i class="icon-table position-left"></i> {$title}
+            </div>
+            <ul class="breadcrumb">
+                <li><a href="{$adminweburl}">Beranda</a></li>
+                <li><a href="{$adminweburl}/pengaturan_aplikasi/">{$title}</a></li>
+                <li class="active">{$sub_title}</li>
+            </ul>					
+        </div>
+    </div>		
+    <!--/Page Header-->
+
+    <!--Page Content-->
+    <div id="wrapper" class="container-fluid page-content">				
+        <div class="panel panel-flat" style="margin: 5px;">
+            <div class="form-group panel-body no-padding-bottom">
+
+                <div class="form-group">
+                    <ul id="myTab" class="nav nav-tabs">                                
+                        <li{if $tab eq "general1"} class="active"{/if}>
+                            <a href="#general1" data-toggle="tab"><b>GENERAL 1</b></a>
+                        </li>                                 
+                        <li{if $tab eq "general2"} class="active"{/if}>
+                            <a href="#general2" data-toggle="tab"><b>GENERAL 2</b></a>
+                        </li>                                
+                        <li{if $tab eq "shortcut"} class="active"{/if}>
+                            <a href="#shortcut" data-toggle="tab"><b>SHORTCUT</b></a>
+                        </li>                                
+                        <li{if $tab eq "updateapp"} class="active"{/if}>
+                            <a href="#updateapp" data-toggle="tab"><b>UPDATE APP</b></a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div id="alert_success" class="form-group" style="display: none;">                         
+                    <div class="alert alert-info">&nbsp;</div>
+                </div>
+                    
+                <div id="alert_error" class="form-group" style="display: none;">                         
+                    <div class="alert alert-danger">&nbsp;</div>
+                </div>
+
+                <div class="form-group tab-content">
+                    <div class="tab-pane fade{if $tab eq "general1"} active in{/if}" id="general1">
+                        
+                        <div class="form-group">
+                            <label for="admin">Avatar:</label>                        
+                            <style type="text/css">
+                                .preview-avatar {
+                                    border:1px solid #a6bac4;
+                                    width: 180px;
+                                    height: 180px;
+                                    cursor: move;
+                                }
+
+                                .post-img-avatar {
+                                    width: 180px;
+                                    height: 180px;
+                                }
+                            </style>
+                            <div class="image-editor-avatar post-img-avatar">
+                                <input id="fileupload_avatar" type="file" name="fileupload_avatar" style="display:none;" class="cropit-image-input" />
+                                <div class="cropit-image-preview preview-avatar"></div>
+                            </div>
+                            <label>Ukuran 180 X 180 px</label><br />   
+                            <div id="upload_avatar" class="btn btn-primary">Upload</div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="logo">Logo:</label>                        
+                            <style type="text/css">
+                                .preview-logo {
+                                    border:1px solid #a6bac4;
+                                    width: 180px;
+                                    height: 180px;
+                                    cursor: move;
+                                }
+                                .post-img-logo {
+                                    width: 180px;
+                                    height: 180px;
+                                }
+                            </style>
+                            <div class="image-editor-logo post-img-logo">
+                                <input id="fileupload_logo" type="file" name="fileupload_logo" style="display:none;" class="cropit-image-input" />
+                                <div class="cropit-image-preview preview-logo"></div>
+                            </div>
+                            <label>Ukuran 180 X 180 px</label><br />   
+                            <div id="upload_logo" class="btn btn-primary">Upload</div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="bg">Splash Screen:</label>                        
+                            <style type="text/css">
+                                .preview-bg {
+                                    border:1px solid #a6bac4;
+                                    width: 320px;
+                                    height: 569px;
+                                    cursor: move;
+                                }
+
+                                .post-img-bg {
+                                    width: 320px;
+                                    height: 569px;
+                                }
+                            </style>
+
+                            <div class="image-editor-bg post-img-bg">
+                                <input id="fileupload_bg" type="file" name="fileupload_bg" style="display:none;" class="cropit-image-input" />
+                                <div class="cropit-image-preview preview-bg"></div>
+                            </div>
+
+                            <label>Ukuran 320 X 569 px</label><br />   
+                            <div id="upload_bg" class="btn btn-primary">Upload</div>
+                        </div>
+                        
+                        <div class="form-group">&nbsp;</div>
+
+                        <div class="form-group">
+                            <div id="i_loading_general1" class="G-btn-animation" style="display: none;"><img src="{$tpl_dir}/assets/img/loading.gif" /></div>                  
+                            {if 'E'|in_array:$array_akses}<div id="btn_simpan_general1" class="btn btn-primary">Update</div>{/if}
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="tab-pane fade{if $tab eq "general2"} active in{/if}" id="general2">
+                        
+                        <div class="form-group">
+                            <label for="landing_page">Landing Page:</label>
+                            <table>
+                                <tr>
+                                    <td>
+                                        <label><input type="radio" name="landing_page" value="0" {if $data[0].landing_page eq 0}checked{/if} />&nbsp;&nbsp;<span class="label bg-blue" style="font-size: 9pt;">BERANDA</span>&nbsp;&nbsp;</label>
+                                        <label><input type="radio" name="landing_page" value="1" {if $data[0].landing_page eq 1}checked{/if} />&nbsp;&nbsp;<span class="label bg-blue" style="font-size: 9pt;">LOGIN</span>&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="tampilkan_shortcut">Tampilkan Shortcut:</label>
+                            <table>
+                                <tr>
+                                    <td>
+                                        <label><input type="radio" name="tampilkan_shortcut" value="1" {if $data[0].tampilkan_shortcut eq 1}checked{/if} />&nbsp;&nbsp;<span class="label bg-blue" style="font-size: 9pt;">YA</span>&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                        <label><input type="radio" name="tampilkan_shortcut" value="0" {if $data[0].tampilkan_shortcut eq 0}checked{/if} />&nbsp;&nbsp;<span class="label bg-blue" style="font-size: 9pt;">TIDAK</span>&nbsp;&nbsp;</label>
+                                    </td>
+                                </tr>
+                            </table>        
+                        </div>
+
+                        <div class="form-group">
+                            <label for="tampilkan_kategori">Tampilkan Kategori:</label>
+                            <table>
+                                <tr>
+                                    <td>
+                                        <label><input type="radio" name="tampilkan_kategori" value="1" {if $data[0].tampilkan_kategori eq 1}checked{/if} />&nbsp;&nbsp;<span class="label bg-blue" style="font-size: 9pt;">YA</span>&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                        <label><input type="radio" name="tampilkan_kategori" value="0" {if $data[0].tampilkan_kategori eq 0}checked{/if} />&nbsp;&nbsp;<span class="label bg-blue" style="font-size: 9pt;">TIDAK</span>&nbsp;&nbsp;</label>
+                                    </td>
+                                </tr>
+                            </table> 
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="tampilkan_induk_kategori">Tampilkan Induk Kategori:</label>
+                            <table>
+                                <tr>
+                                    <td>
+                                        <label><input type="radio" name="tampilkan_induk_kategori" value="1" {if $data[0].tampilkan_induk_kategori eq 1}checked{/if} />&nbsp;&nbsp;<span class="label bg-blue" style="font-size: 9pt;">YA</span>&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                        <label><input type="radio" name="tampilkan_induk_kategori" value="0" {if $data[0].tampilkan_induk_kategori eq 0}checked{/if} />&nbsp;&nbsp;<span class="label bg-blue" style="font-size: 9pt;">TIDAK</span>&nbsp;&nbsp;</label>
+                                    </td>
+                                </tr>
+                            </table> 
+                        </div>
+
+                        <div class="form-group">&nbsp;</div>
+
+                        <div class="form-group">
+                            <div id="i_loading_general2" class="G-btn-animation" style="display: none;"><img src="{$tpl_dir}/assets/img/loading.gif" /></div>                  
+                            {if 'E'|in_array:$array_akses}<div id="btn_simpan_general2" class="btn btn-primary">Update</div>{/if}
+                        </div>
+                    </div>
+                    
+                    <div class="tab-pane fade{if $tab eq "shortcut"} active in{/if}" id="shortcut">
+                        
+                        <div class="panel-body no-padding-bottom">
+                            <div class="input-group">
+                                <input type="text" value="{$query}" class="form-control" name="query" id="query" placeholder="Masukan kata kunci pencarian..." />
+                                <span class="input-group-btn"><div id="btn_cari" type="submit" class="btn btn-default">Cari</div>
+                                <a class="btn btn-default" href="list.php?tab=shortcut">Reset</a></span>                                                  
+                            </div>
+
+                            <div class="form-group"></div>
+
+                            <div class="form-group">
+                                {if 'T'|in_array:$array_akses}<div id='btn_add' class="btn btn-primary">Baru</div>{/if}
+                                {if 'E'|in_array:$array_akses}<div id='btn_edit' class="btn btn-success disabled">Edit</div>{/if}
+                                {if 'H'|in_array:$array_akses}<div id='btn_delete' class="btn btn-danger disabled">Hapus</div>{/if}
+                            </div>
+                        </div>
+			
+                        <div class="form-group"></div>
+                        
+                        <div class="table-responsive">
+                            <table class="table datatable table-striped">
+                                <thead>
+                                    <tr>
+                                        <th width="1%"><input type="checkbox" id="select_all" /></th>
+                                        <th width="1%"><div style="text-align: center;">No.</div></th>
+                                        <th width="10%"><div style="text-align: center;">Logo</div></th>
+                                        <th width="30%"><div style="text-align: left;">Nama Shortcut</div></th>
+                                        <th width="30%"><div style="text-align: left;">Tujuan Shortcut</div></th>
+                                        <th width="10%"><div style="text-align: left;">Aksi</div></th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    {assign var="no" value=1}
+                                    {foreach $listdetail as $entry}                                    
+                                        <tr id="baris_{$entry.id}">
+                                            <td align="center"><input type="checkbox" id_select="{$entry.id}" name="select_{$entry.id}" class="select" /></td>
+                                            <td align="center">{$limitpage*($currentpage-1)+$no}</td>
+                                            <td align="center">
+                                                <img src="{$homeurl}/uploads/shortcut/{if $entry.icon neq ''}{$entry.icon}{else}default.png{/if}" width="35" />
+                                            </td>
+                                            <td align="left">{$entry.nama}</td>
+                                            <td align="left">{$entry.direction}</td>
+                                            <td>
+                                                <div style="text-align: center;  white-space: nowrap;">
+                                                    {if 'E'|in_array:$array_akses}<div id_select="{$entry.id}" class="btn btn-success edit">Edit</div>{/if}
+                                                    {if 'H'|in_array:$array_akses}<div id_select="{$entry.id}" class="btn btn-danger hapus">Hapus</div>{/if}                                                         
+                                                </div>
+                                            </td>                                          
+                                        </tr>
+                                        {assign var="no" value=$no+1}  
+                                    {/foreach}
+                                </tbody>
+
+                                {if $totalpage gt 1}
+                                    <tfoot>
+                                        <tr>
+                                            <th colspan="6">
+                                                <div style="text-align: center;">
+                                                    {if $currentpage gt 1}                                
+                                                        <a class="btn btn-default" href="list.php?tab=shortcut&page={$currentpage-1}{if $query neq ''}&query={$query}{/if}">&larr; Prev</a>
+                                                    {/if}
+                                                    {assign var="item" value=$frompage}
+                                                    {for $foo=$frompage to $untilpage}
+                                                        {if $item eq $currentpage}
+                                                            <span class="btn btn-info">{$item}</span>                                
+                                                        {else}
+                                                            <a class="btn btn-default" href="list.php?tab=shortcut&page={$item}{if $query neq ''}&query={$query}{/if}">{$item}</a>
+                                                        {/if}
+                                                        {assign var="item" value=$item+1}                                
+                                                    {/for}
+
+                                                    {if $totalpage gt $currentpage}                                
+                                                        <a class="btn btn-default" href="list.php?tab=shortcut&page={$currentpage+1}{if $query neq ''}&query={$query}{/if}">Next &rarr;</a>
+                                                    {/if}                                
+                                                </div>  
+                                            </th>
+                                        </tr>
+                                    </tfoot>
+                                {/if}
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-pane fade{if $tab eq "updateapp"} active in{/if}" id="updateapp">
+                        <div class="form-group">
+                            <label for="app_ver_no">Nomer Versi Update:</label>
+                            <input type="text" value="{$data[0].app_ver_no}" class="form-control" name="app_ver_no" placeholder="" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="app_ver_name">Nama Versi Update:</label>
+                            <input type="text" value="{$data[0].app_ver_name}" class="form-control" name="app_ver_name" placeholder="" />
+                        </div> 
+                         
+                        <div class="form-group">
+                            <label for="app_desc">Update Description:</label>
+                            <textarea class="form-control" name="app_desc" style="height: 150px;" placeholder="">{$data[0].app_desc}</textarea>
+                        </div>
+                         
+                        <div class="form-group">&nbsp;</div>
+
+                        <div class="form-group">
+                            <div id="i_loading_updateapp" class="G-btn-animation" style="display: none;"><img src="{$tpl_dir}/assets/img/loading.gif" /></div>                  
+                            {if 'E'|in_array:$array_akses}<div id="btn_simpan_updateapp" class="btn btn-primary">Update</div>{/if}
+                        </div>
+                    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--/Page Content-->
+
+    <!--Footer -->
+    {include file="$include_tpl/includes/footer.html"}
+    <!--/Footer-->
+
+</section>
+<!--/Page Container-->
+
+<!-- Global scripts -->
+<script src="{$tpl_dir}/js/jquery.js"></script>	
+<script src="{$tpl_dir}/js/bootstrap.js"></script>
+<script src="{$tpl_dir}/js/jquery.ui.js"></script>
+<script src="{$tpl_dir}/js/nav.accordion.js"></script>	
+<script src="{$tpl_dir}/js/hammerjs.js"></script>
+<script src="{$tpl_dir}/js/jquery.hammer.js"></script>
+<script src="{$tpl_dir}/js/scrollup.js"></script>	
+<script src="{$tpl_dir}/js/jquery.slimscroll.js"></script>	
+<script src="{$tpl_dir}/js/smart-resize.js"></script>
+<script src="{$tpl_dir}/js/blockui.min.js"></script>		
+<script src="{$tpl_dir}/js/wow.min.js"></script>					
+<script src="{$tpl_dir}/js/fancybox.min.js"></script>
+<script src="{$tpl_dir}/js/venobox.js"></script>
+<script src="{$tpl_dir}/js/forms/uniform.min.js"></script>
+<script src="{$tpl_dir}/js/forms/switchery.js"></script>
+<script src="{$tpl_dir}/js/forms/select2.min.js"></script>	
+<script src="{$tpl_dir}/js/core.js"></script>
+<!-- /global scripts -->
+
+<script type="text/javascript" src="{$tpl_dir}/assets/js/jquery.cropit.js"></script> 
+<!-- iCheck -->
+<link rel="stylesheet" href="{$tpl_dir}/js/iCheck/square/blue.css">
+<script src="{$tpl_dir}/js/iCheck/icheck.min.js"></script>  
+
+<script type="text/javascript">        
+
+    $(function () {           
+        $('input').iCheck({
+            checkboxClass: 'icheckbox_square-blue',
+            radioClass: 'iradio_square-blue',
+            increaseArea: '20%' // optional
+        });
+            
+        var setLoading = function(isLoading, tab) {
+            if(isLoading) {
+                $('#i_loading_'+tab).show();
+                $('#btn_simpan_'+tab).hide();
+            } else {
+                $('#i_loading_'+tab).hide();
+                $('#btn_simpan_'+tab).show();                    
+            }
+        };
+
+        var setMessage = function(type, message) {
+            $('#alert_'+type+' .alert').text(message);
+            $('#alert_'+type).show('slow');
+            setTimeout(function() {
+                $('#alert_'+type).hide('slow');
+            }, 5000);
+            $("body, html").animate({ 
+                scrollTop: $('#wrapper').offset().top 
+            }, 600);
+        };
+        
+        var setButton = function() {
+            var temp = new Array();
+            if(delete_selected.length>0) temp = delete_selected.split(',');                
+            $( "#btn_edit" ).removeClass('disabled').addClass(temp.length==1?'':'disabled');
+            $( "#btn_delete" ).removeClass('disabled').addClass(temp.length>0?'':'disabled');
+        };
+
+        var prosesDelete = function(id) {
+            swal({
+                title: 'Menghapus Data',
+                text: 'Apakah Anda Yakin Akan Menghapus Record Data Ini?',
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, Hapus Sekarang!',
+                cancelButtonText: 'Batal',
+                confirmButtonClass: 'btn btn-success',
+                cancelButtonClass: 'btn btn-danger',
+                buttonsStyling: false
+            }).then(function () {
+                $.ajax({
+                    url: 'delete.php',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: { id: id },
+                    success: function(data, textStatus, jqXHR) {
+                        
+                        if(data['success']) {
+                            window.location='list.php?tab=shortcut{if $query neq ""}&query={$query}{/if}';
+                        } else {
+                            setMessage('error', data['message']);
+                        }
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        setMessage('error', 'Terjadi kesalahan system.');
+                    }
+                }); 
+            }, function (dismiss) {
+                // dismiss can be 'cancel', 'overlay', 'close', 'timer'
+                //if (dismiss === 'cancel') {
+                    //swal('Cancelled', 'Record Data Batal Dihapus', 'error');
+                //}
+            });
+        };
+
+        var delete_selected = "";
+
+        $( "#btn_add" ).click(function() {
+            window.location='add.php';
+        });
+
+        $( "#btn_edit" ).click(function() {
+            window.location='edit.php?id='+delete_selected;
+        });
+
+        $( "#btn_delete" ).click(function() {
+            prosesDelete(delete_selected);
+        });
+
+        $( "#btn_cari" ).click(function() {
+            var query = $( "#query" ).val();
+            window.location='list.php?tab=shortcut'+(query.length>0?'&query='+query:'');
+        });
+
+        $( ".hapus" ).click(function() {                
+            var id = this.getAttribute('id_select');
+            prosesDelete(id);                
+        });
+
+        $( ".edit" ).click(function() {
+            var id = this.getAttribute('id_select');
+            window.location='edit.php?id='+id;
+        });
+
+        $( "#select_all" ).change(function() {
+            var is_checked = $( "#select_all" ).is(':checked');
+            var element = $( ".select" );
+            var lengh = element.size();
+            delete_selected = '';
+            for(var i=0; i<lengh; i++) {
+                var id = element[i].getAttribute('id_select');
+                var nama = element[i].getAttribute('name');
+                $('[name='+nama+']').prop('checked', is_checked);                    
+                if(is_checked) delete_selected+=(delete_selected==''?'':',')+(is_checked?id:"");
+            }
+            setButton();
+        });
+
+        $( ".select" ).change(function() {
+            var id = this.getAttribute('id_select');
+            var nama = this.getAttribute('name');
+            var is_checked = $( '[name='+nama+']').is(':checked');
+            var temps = delete_selected.split(',');
+            delete_selected='';
+            for(var key in temps) {
+                if(temps[key]!=id) delete_selected+=(delete_selected.length>0?",":"")+temps[key];
+            }
+            delete_selected+=(delete_selected.length>0?",":"")+(is_checked?id:""); 
+            setButton();
+        });
+            
+            
+        
+        $('#upload_avatar').click(function(){
+            $('#fileupload_avatar').trigger('click'); 
+            return false;
+        });
+
+        $('.image-editor-avatar').cropit({
+            smallImage: 'stretch'{if $data[0].avatar neq ''},
+            imageState: {
+                src: '{$homeurl}/uploads/umum/{$data[0].avatar}',
+            }{/if}
+        });
+
+        $('#upload_logo').click(function(){
+            $('#fileupload_logo').trigger('click'); 
+            return false;
+        });
+
+        $('.image-editor-logo').cropit({
+            smallImage: 'stretch'{if $data[0].logo neq ''},
+            imageState: {
+                src: '{$homeurl}/uploads/umum/{$data[0].logo}',
+            }{/if}
+        });
+            
+        $('#upload_bg').click(function() {
+            $('#fileupload_bg').trigger('click'); 
+            return false;
+        });
+
+        $('.image-editor-bg').cropit({
+          smallImage: 'stretch'{if $data[0].bg neq ''},
+          imageState: {
+            src: '{$homeurl}/uploads/umum/{$data[0].bg}',
+          }{/if}
+        });
+        
+        var landing_page = {$data[0].landing_page};        
+        $('input[name=landing_page]').on('ifChecked', function(event){
+            landing_page = $(this).val();
+            //alert("tampilkan_shortcut:" + tampilkan_shortcut);
+        });
+
+        var tampilkan_shortcut = {$data[0].tampilkan_shortcut};        
+        $('input[name=tampilkan_shortcut]').on('ifChecked', function(event){
+            tampilkan_shortcut = $(this).val();
+            //alert("tampilkan_shortcut:" + tampilkan_shortcut);
+        });
+        
+        var tampilkan_kategori = {$data[0].tampilkan_kategori};        
+        $('input[name=tampilkan_kategori]').on('ifChecked', function(event){
+            tampilkan_kategori = $(this).val();
+            //alert("tampilkan_kategori:" + tampilkan_kategori);
+        });
+
+        var tampilkan_induk_kategori = {$data[0].tampilkan_induk_kategori};        
+        $('input[name=tampilkan_induk_kategori]').on('ifChecked', function(event){
+            tampilkan_induk_kategori = $(this).val();
+            //alert("tampilkan_induk_kategori:" + tampilkan_induk_kategori);
+        });
+        
+        $('#btn_simpan_general1').click(function() {            
+
+            var data = new FormData();
+            var imageDataAvatar = $('.image-editor-avatar').cropit('export');
+            data.append('filename_avatar', imageDataAvatar==undefined?'':imageDataAvatar);
+            var imageDataLogo = $('.image-editor-logo').cropit('export');
+            data.append('filename_logo', imageDataLogo==undefined?'':imageDataLogo);
+            var imageDataBg = $('.image-editor-bg').cropit('export');
+            data.append('filename_bg', imageDataBg==undefined?'':imageDataBg);
+            
+            setLoading(true, "general1");
+            $.ajax({
+                type: 'POST',
+                url: 'updateGeneral1.php',
+                data: data,
+                cache: false,
+                dataType: 'json',
+                processData: false, // Don't process the files
+                contentType: false, // Set content type to false as jQuery will tell the server its a query string request
+                success: function(data) {
+                    setLoading(false, 'general1');
+                    if(data['success']) {
+                        setMessage('success', data['message']);  
+                    } else {
+                        setMessage('error', data['message']);                        
+                    }
+                }, 
+                error: function() {
+                    setLoading(false, 'general1');
+                    setMessage('error', 'Kesalahan server. Mohon diulang kembali!');
+                }
+            }); 
+        });
+        
+        $('#btn_simpan_general2').click(function() {            
+
+            var data = new FormData();
+            data.append('landing_page', landing_page);
+            data.append('tampilkan_shortcut', tampilkan_shortcut);
+            data.append('tampilkan_kategori', tampilkan_kategori);
+            data.append('tampilkan_induk_kategori', tampilkan_induk_kategori);
+
+            setLoading(true, "general2");
+            $.ajax({
+                type: 'POST',
+                url: 'updateGeneral2.php',
+                data: data,
+                cache: false,
+                dataType: 'json',
+                processData: false, // Don't process the files
+                contentType: false, // Set content type to false as jQuery will tell the server its a query string request
+                success: function(data) {
+                    setLoading(false, 'general2');
+                    if(data['success']) {
+                        setMessage('success', data['message']);  
+                    } else {
+                        setMessage('error', data['message']);                        
+                    }
+                }, 
+                error: function() {
+                    setLoading(false, 'general2');
+                    setMessage('error', 'Kesalahan server. Mohon diulang kembali!');
+                }
+            }); 
+        });
+        
+        
+        
+        
+        $('#btn_simpan_updateapp').click(function() {
+            var data = new FormData();                
+            data.append('app_ver_no', $('[name=app_ver_no]').val());
+            data.append('app_desc', $('[name=app_desc]').val());
+            data.append('app_ver_name', $('[name=app_ver_name]').val());
+
+            setLoading(true, 'updateapp');
+            $.ajax({
+                type: 'POST',
+                url: 'updateRealease.php',
+                data: data,
+                cache: false,
+                dataType: 'json',
+                processData: false, // Don't process the files
+                contentType: false, // Set content type to false as jQuery will tell the server its a query string request
+                success: function(data) {
+                    setLoading(false, 'updateapp');
+                    if(data['success']) {
+                        setMessage('success', data['message']);  
+                    } else {
+                        setMessage('error', data['message']);                        
+                    }
+                }, 
+
+                error: function() {
+                    setLoading(false, 'updateapp');
+                    setErrorMessage('Kesalahan server. Mohon diulang kembali!');
+                }
+            }); 
+        });
+               
+        
+        {if $alert_success neq ""}setMessage('success', '{$alert_success}');{/if}
+        {if $alert_error neq ""}setMessage('error', '{$alert_error}');{/if} 
+    });
+</script>
+</body>{include file="$include_tpl/includes/footer_js.html"}
+</html>

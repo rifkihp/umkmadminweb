@@ -1,0 +1,10 @@
+[26-Oct-2018 10:25:05 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_connect() in /home/u5183746/public_html/laundry.id/includes/php/classUtama.php:33
+Stack trace:
+#0 /home/u5183746/public_html/laundry.id/adminweb/index.php(21): classUtama->mysql_connect(true)
+#1 {main}
+  thrown in /home/u5183746/public_html/laundry.id/includes/php/classUtama.php on line 33
+[26-Oct-2018 10:25:05 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Call to undefined function mysql_connect() in /home/u5183746/public_html/laundry.id/includes/php/classUtama.php:33
+Stack trace:
+#0 /home/u5183746/public_html/laundry.id/adminweb/index.php(21): classUtama->mysql_connect(true)
+#1 {main}
+  thrown in /home/u5183746/public_html/laundry.id/includes/php/classUtama.php on line 33
