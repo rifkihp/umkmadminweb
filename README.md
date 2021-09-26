@@ -1,2 +1,2 @@
-# umkmadminweb
-Admin Dashboard Umkm
+# Admin Dashboard Umkm
+Aplikasi admin web untuk memanagemen aplikasi umkm.
